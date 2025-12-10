@@ -130,30 +130,6 @@ export default function ContactSection() {
             transition={{ duration: 0.6 }}
             className="space-y-6"
           >
-            {/* Contact Details */}
-            <div className="space-y-4">
-              {contactInfo.map((info, index) => (
-                <motion.a
-                  key={info.label}
-                  href={info.href}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  whileHover={{ x: 5 }}
-                  className="flex items-center space-x-4 p-4 bg-white rounded-xl border border-neutral-200 hover:border-neutral-300 transition-all duration-300"
-                >
-                  <div className="p-3 bg-neutral-50 rounded-lg">
-                    <info.icon className="w-5 h-5 text-neutral-900" />
-                  </div>
-                  <div>
-                    <div className="text-sm text-neutral-600">{info.label}</div>
-                    <div className="text-neutral-900 font-medium">{info.value}</div>
-                  </div>
-                </motion.a>
-              ))}
-            </div>
-
             {/* Social Links */}
             <Card className="p-6 border-neutral-200">
               <h3 className="text-lg font-semibold text-neutral-900 mb-4">
