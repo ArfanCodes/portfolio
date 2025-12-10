@@ -19,12 +19,8 @@ const experiences = [
     title: 'Cloud Core Member',
     company: 'Google Developer Groups on Campus (GDSC MJCET)',
     period: 'Nov 2025 – Present',
-    description: 'Part of the core Cloud team responsible for driving cloud-focused learning on campus, with emphasis on practical demos and beginner-friendly sessions.',
-    achievements: [
-      'Organized cloud-focused workshops and hands-on sessions',
-      'Created beginner-friendly learning materials and demos',
-      'Contributed to building a collaborative tech community on campus',
-    ],
+    description: 'Part of the core Cloud team',
+    achievements: [],
   },
 ];
 
