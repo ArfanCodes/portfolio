@@ -35,9 +35,13 @@ const socialLinks = [
 
 export default function ContactSection() {
   const [showSuccess, setShowSuccess] = useState(false);
+  const [redirectUrl, setRedirectUrl] = useState('');
 
   // Check if redirected back after form submission
   useEffect(() => {
+    // Set the redirect URL dynamically based on current domain
+    setRedirectUrl(`${window.location.origin}/?success=true#contact`);
+    
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('success') === 'true') {
       setShowSuccess(true);
@@ -82,7 +86,7 @@ export default function ContactSection() {
                 <input type="hidden" name="_subject" value="New Portfolio Contact Message!" />
                 <input type="hidden" name="_captcha" value="false" />
                 <input type="hidden" name="_template" value="table" />
-                <input type="hidden" name="_next" value="http://localhost:3000/?success=true#contact" />
+                <input type="hidden" name="_next" value={redirectUrl} />
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-neutral-900 mb-2">
                     Your Name
