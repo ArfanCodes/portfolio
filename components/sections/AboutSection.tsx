@@ -105,13 +105,13 @@ export default function AboutSection() {
             About Me
           </motion.h2>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             {/* Circular Profile Image with Radiant Border */}
             <motion.div
               initial={{ opacity: 0, x: -50, scale: 0.8 }}
               animate={{ opacity: 1, x: 0, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.6, type: 'spring', stiffness: 100 }}
-              className="flex justify-center"
+              className="flex justify-center items-center"
             >
               <div className="relative">
                 {/* Radiant border effect */}
@@ -155,23 +155,15 @@ export default function AboutSection() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.9 }}
                 >
-                  I'm Mohammed Arfan, a <span className="font-semibold text-neutral-900">React Native app developer</span> with a strong focus on building clean, scalable, and intuitive mobile applications. I enjoy turning real-world problems into functional, well-designed digital experiences—whether it's through smart state management, modern UI patterns, or seamless backend integrations.
-                </motion.p>
-                <motion.p 
-                  className="text-base text-neutral-600 leading-relaxed mb-4"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 1 }}
-                >
-                  Alongside my technical work, I'm highly active in extracurricular and community-driven tech initiatives. As the <span className="font-semibold text-neutral-900">Technical Head of IEEE-CIS MJCET</span> and a <span className="font-semibold text-neutral-900">Cloud Core Member at GDSC</span>, I lead workshops, guide student developers, and help events that promote hands-on learning and innovation.
+                  I'm <span className="font-bold text-neutral-900">Mohammed Arfan</span>, a <span className="font-bold text-neutral-900">3rd year engineering student</span> at <span className="font-bold text-neutral-900">Muffakham Jah College of Engineering & Technology (MJCET)</span> and a <span className="font-bold text-neutral-900">React Native app developer</span> who enjoys building <span className="font-semibold text-neutral-900">clean, scalable and intuitive mobile applications</span>. I focus on turning real-world problems into functional and thoughtfully designed digital experiences, whether that involves <span className="font-semibold text-neutral-900">efficient state management, modern UI patterns or seamless backend integrations</span>.
                 </motion.p>
                 <motion.p 
                   className="text-base text-neutral-600 leading-relaxed"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 1.1 }}
+                  transition={{ duration: 0.6, delay: 1 }}
                 >
-                  I thrive in environments where I can build, collaborate, and contribute—both as a developer and as someone who uplifts the tech community around me.
+                  Beyond academics and development work, I stay deeply involved in <span className="font-semibold text-neutral-900">community-driven tech initiatives</span>. As the <span className="font-bold text-neutral-900">Technical Head of IEEE CIS MJCET</span> and a <span className="font-bold text-neutral-900">Cloud Core Member at GDG</span>, I lead workshops, mentor student developers and contribute to events that encourage <span className="font-semibold text-neutral-900">practical learning and innovation</span>.
                 </motion.p>
               </motion.div>
 

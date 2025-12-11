@@ -51,8 +51,12 @@ export default function ContactSection() {
     }
   }, []);
   return (
-    <section id="contact" className="min-h-screen py-20 px-6 lg:px-8 bg-neutral-50">
-      <div className="max-w-6xl mx-auto">
+    <section id="contact" className="min-h-screen py-20 px-6 lg:px-8 bg-gradient-to-b from-white via-neutral-50 to-neutral-100 relative overflow-hidden">
+      {/* Decorative background elements */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(120,120,120,0.08)_0%,transparent_50%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(100,100,100,0.08)_0%,transparent_50%)]" />
+      
+      <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -76,7 +80,7 @@ export default function ContactSection() {
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.6 }}
           >
-            <Card className="p-8 border-neutral-200">
+            <Card className="p-8 border-neutral-200 shadow-lg hover:shadow-xl transition-shadow duration-300 bg-white/80 backdrop-blur-sm">
               <form 
                 action="https://formsubmit.co/arfaanmohammed56@gmail.com" 
                 method="POST"
@@ -88,7 +92,7 @@ export default function ContactSection() {
                 <input type="hidden" name="_template" value="table" />
                 <input type="hidden" name="_next" value={redirectUrl} />
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-neutral-900 mb-2">
+                  <label htmlFor="name" className="block text-sm font-semibold text-neutral-900 mb-2">
                     Your Name
                   </label>
                   <input
@@ -96,13 +100,13 @@ export default function ContactSection() {
                     id="name"
                     name="name"
                     required
-                    className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent focus:bg-white transition-all duration-200 hover:border-neutral-300"
                     placeholder="John Doe"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-neutral-900 mb-2">
+                  <label htmlFor="email" className="block text-sm font-semibold text-neutral-900 mb-2">
                     Email Address
                   </label>
                   <input
@@ -110,13 +114,13 @@ export default function ContactSection() {
                     id="email"
                     name="email"
                     required
-                    className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent focus:bg-white transition-all duration-200 hover:border-neutral-300"
                     placeholder="john@example.com"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-neutral-900 mb-2">
+                  <label htmlFor="subject" className="block text-sm font-semibold text-neutral-900 mb-2">
                     Subject
                   </label>
                   <input
@@ -124,13 +128,13 @@ export default function ContactSection() {
                     id="subject"
                     name="subject"
                     required
-                    className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent focus:bg-white transition-all duration-200 hover:border-neutral-300"
                     placeholder="Project Inquiry"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-neutral-900 mb-2">
+                  <label htmlFor="message" className="block text-sm font-semibold text-neutral-900 mb-2">
                     Message
                   </label>
                   <textarea
@@ -138,15 +142,19 @@ export default function ContactSection() {
                     name="message"
                     rows={5}
                     required
-                    className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent transition-all resize-none"
+                    className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent focus:bg-white transition-all duration-200 resize-none hover:border-neutral-300"
                     placeholder="Tell me about your project..."
                   />
                 </div>
 
-                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                <motion.div 
+                  whileHover={{ scale: 1.02, y: -2 }} 
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                >
                   <Button
                     type="submit"
-                    className="w-full bg-neutral-900 hover:bg-neutral-800 text-white rounded-xl py-6 text-base font-medium shadow-lg hover:shadow-xl transition-all duration-300"
+                    className="w-full bg-gradient-to-r from-neutral-900 via-neutral-800 to-neutral-900 hover:from-neutral-800 hover:via-neutral-700 hover:to-neutral-800 text-white rounded-full py-6 text-base font-medium shadow-lg hover:shadow-2xl transition-all duration-300"
                   >
                     <Send className="w-5 h-5 mr-2" />
                     Send Message
@@ -165,7 +173,7 @@ export default function ContactSection() {
             className="space-y-6"
           >
             {/* Social Links */}
-            <Card className="p-6 border-neutral-200">
+            <Card className="p-6 border-neutral-200 shadow-lg hover:shadow-xl transition-shadow duration-300 bg-white/80 backdrop-blur-sm">
               <h3 className="text-lg font-semibold text-neutral-900 mb-4">
                 Connect With Me
               </h3>
@@ -180,8 +188,8 @@ export default function ContactSection() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.3, delay: index * 0.1 }}
-                    whileHover={{ scale: 1.1, y: -3 }}
-                    className="p-3 bg-neutral-50 rounded-lg hover:bg-neutral-900 hover:text-white transition-all duration-300"
+                    whileHover={{ scale: 1.15, y: -4 }}
+                    className="p-4 bg-gradient-to-br from-neutral-50 to-neutral-100 rounded-xl hover:from-neutral-900 hover:to-neutral-800 hover:text-white transition-all duration-300 shadow-sm hover:shadow-lg"
                   >
                     <social.icon className="w-5 h-5" />
                   </motion.a>
@@ -190,15 +198,19 @@ export default function ContactSection() {
             </Card>
 
             {/* Availability Card */}
-            <Card className="p-6 bg-gradient-to-br from-neutral-900 to-neutral-800 text-white border-0">
-              <div className="flex items-center space-x-3 mb-3">
-                <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse" />
-                <span className="font-semibold">Available for Projects</span>
+            <Card className="p-6 bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 text-white border-0 shadow-xl hover:shadow-2xl transition-shadow duration-300 relative overflow-hidden">
+              {/* Animated gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-pulse" />
+              <div className="relative z-10">
+                <div className="flex items-center space-x-3 mb-3">
+                  <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/50" />
+                  <span className="font-semibold text-lg">Available for Projects</span>
+                </div>
+                <p className="text-neutral-300 text-sm leading-relaxed">
+                  I'm currently available for freelance work and new opportunities. 
+                  Let's discuss how I can help bring your ideas to life.
+                </p>
               </div>
-              <p className="text-neutral-300 text-sm leading-relaxed">
-                I'm currently available for freelance work and new opportunities. 
-                Let's discuss how I can help bring your ideas to life.
-              </p>
             </Card>
           </motion.div>
         </div>
@@ -209,9 +221,9 @@ export default function ContactSection() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-16 pt-8 border-t border-neutral-200 text-center"
+          className="mt-8 pt-4 border-t border-neutral-200 text-center"
         >
-          <p className="text-neutral-600">
+          <p className="text-sm text-neutral-600">
             © 2025 Arfan
           </p>
         </motion.div>

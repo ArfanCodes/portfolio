@@ -213,13 +213,19 @@ export default function ResumeDownloadModal({ isOpen, onClose }: ResumeDownloadM
                 </div>
 
                 {/* Submit Button */}
-                <Button
-                  type="submit"
-                  className="w-full bg-neutral-900 hover:bg-neutral-800 text-white rounded-lg py-6 text-base font-medium shadow-lg hover:shadow-xl transition-all duration-300"
+                <motion.div
+                  whileHover={{ scale: 1.02, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
-                  <Download className="w-5 h-5 mr-2" />
-                  Download Resume
-                </Button>
+                  <Button
+                    type="submit"
+                    className="w-full bg-gradient-to-r from-neutral-900 via-neutral-800 to-neutral-900 hover:from-neutral-800 hover:via-neutral-700 hover:to-neutral-800 text-white rounded-full py-6 text-base font-medium shadow-lg hover:shadow-2xl transition-all duration-300"
+                  >
+                    <Download className="w-5 h-5 mr-2" />
+                    Download Resume
+                  </Button>
+                </motion.div>
               </form>
             </motion.div>
           </div>

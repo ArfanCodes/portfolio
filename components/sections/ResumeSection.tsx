@@ -94,13 +94,14 @@ export default function ResumeSection() {
           </p>
           
           <motion.div
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.05, y: -3 }}
             whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
           >
             <Button
               onClick={() => setIsModalOpen(true)}
               size="lg"
-              className="bg-neutral-900 hover:bg-neutral-800 text-white rounded-full px-8 py-6 text-base font-medium shadow-lg hover:shadow-xl transition-all duration-300"
+              className="bg-gradient-to-r from-neutral-900 via-neutral-800 to-neutral-900 hover:from-neutral-800 hover:via-neutral-700 hover:to-neutral-800 text-white rounded-full px-8 py-6 text-base font-medium shadow-lg hover:shadow-2xl transition-all duration-300"
             >
               <Download className="w-5 h-5 mr-2" />
               Download Resume
@@ -179,14 +180,20 @@ export default function ResumeSection() {
                 <div className="text-sm text-neutral-600">Last Updated</div>
                 <div className="text-neutral-900 font-medium">December 2025</div>
               </div>
-              <Button
-                onClick={() => setIsModalOpen(true)}
-                variant="outline"
-                className="rounded-full border-neutral-300 hover:bg-neutral-900 hover:text-white transition-all duration-300"
+              <motion.div
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
-                <Download className="w-4 h-4 mr-2" />
-                Download PDF
-              </Button>
+                <Button
+                  onClick={() => setIsModalOpen(true)}
+                  variant="outline"
+                  className="rounded-full border-2 border-neutral-300 hover:bg-gradient-to-r hover:from-neutral-900 hover:to-neutral-800 hover:text-white hover:border-transparent shadow-md hover:shadow-xl transition-all duration-300"
+                >
+                  <Download className="w-4 h-4 mr-2" />
+                  Download PDF
+                </Button>
+              </motion.div>
             </div>
           </div>
         </motion.div>

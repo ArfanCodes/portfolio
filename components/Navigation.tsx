@@ -52,12 +52,12 @@ export default function Navigation() {
             : 'bg-transparent'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6">
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
             <motion.a
               href="#about"
-              className="text-xl lg:text-2xl font-bold text-neutral-900"
+              className="text-xl lg:text-2xl font-bold text-neutral-900 -ml-2 lg:-ml-4"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -65,24 +65,25 @@ export default function Navigation() {
             </motion.a>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-1">
+            <div className="hidden lg:flex items-center space-x-2 mr-0 lg:-mr-4">
               {navItems.map((item) => (
                 <motion.a
                   key={item.name}
                   href={item.href}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className={`relative px-4 py-2 text-sm font-medium transition-colors ${
+                  whileHover={{ y: -1 }}
+                  whileTap={{ scale: 0.98 }}
+                  className={`relative px-5 py-2.5 text-[15px] font-medium transition-all duration-200 rounded-lg ${
                     activeSection === item.href.substring(1)
-                      ? 'text-neutral-900'
-                      : 'text-neutral-600 hover:text-neutral-900'
+                      ? 'text-neutral-900 bg-neutral-100/50'
+                      : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50'
                   }`}
+                  style={{ letterSpacing: '0.01em' }}
                 >
                   {item.name}
                   {activeSection === item.href.substring(1) && (
                     <motion.div
                       layoutId="activeSection"
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-neutral-900"
+                      className="absolute bottom-0 left-3 right-3 h-[2px] bg-neutral-900 rounded-full"
                       transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                     />
                   )}
