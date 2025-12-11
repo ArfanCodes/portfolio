@@ -1,7 +1,8 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Instagram } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Mail, Phone, MapPin, Send, Github, Linkedin, Instagram, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 
@@ -33,6 +34,18 @@ const socialLinks = [
 ];
 
 export default function ContactSection() {
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  // Check if redirected back after form submission
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('success') === 'true') {
+      setShowSuccess(true);
+      setTimeout(() => setShowSuccess(false), 5000);
+      // Clean up URL
+      window.history.replaceState({}, '', window.location.pathname + '#contact');
+    }
+  }, []);
   return (
     <section id="contact" className="min-h-screen py-20 px-6 lg:px-8 bg-neutral-50">
       <div className="max-w-6xl mx-auto">
@@ -60,7 +73,16 @@ export default function ContactSection() {
             transition={{ duration: 0.6 }}
           >
             <Card className="p-8 border-neutral-200">
-              <form className="space-y-6">
+              <form 
+                action="https://formsubmit.co/arfaanmohammed56@gmail.com" 
+                method="POST"
+                className="space-y-6"
+              >
+                {/* FormSubmit Configuration */}
+                <input type="hidden" name="_subject" value="New Portfolio Contact Message!" />
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="hidden" name="_template" value="table" />
+                <input type="hidden" name="_next" value="http://localhost:3000/?success=true#contact" />
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-neutral-900 mb-2">
                     Your Name
@@ -68,6 +90,8 @@ export default function ContactSection() {
                   <input
                     type="text"
                     id="name"
+                    name="name"
+                    required
                     className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent transition-all"
                     placeholder="John Doe"
                   />
@@ -80,6 +104,8 @@ export default function ContactSection() {
                   <input
                     type="email"
                     id="email"
+                    name="email"
+                    required
                     className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent transition-all"
                     placeholder="john@example.com"
                   />
@@ -92,6 +118,8 @@ export default function ContactSection() {
                   <input
                     type="text"
                     id="subject"
+                    name="subject"
+                    required
                     className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent transition-all"
                     placeholder="Project Inquiry"
                   />
@@ -103,7 +131,9 @@ export default function ContactSection() {
                   </label>
                   <textarea
                     id="message"
+                    name="message"
                     rows={5}
+                    required
                     className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent transition-all resize-none"
                     placeholder="Tell me about your project..."
                   />
@@ -181,7 +211,36 @@ export default function ContactSection() {
             © 2025 Arfan
           </p>
         </motion.div>
-      </div>
-    </section>
+        </div>
+
+        {/* Success Popup */}
+        <AnimatePresence>
+          {showSuccess && (
+            <motion.div
+              initial={{ opacity: 0, y: -50, x: '-50%' }}
+              animate={{ opacity: 1, y: 0, x: '-50%' }}
+              exit={{ opacity: 0, y: -50, x: '-50%' }}
+              transition={{ duration: 0.5, type: 'spring' }}
+              className="fixed top-8 left-1/2 transform -translate-x-1/2 z-50"
+            >
+              <Card className="p-6 bg-gradient-to-r from-green-500 to-emerald-600 text-white border-0 shadow-2xl">
+                <div className="flex items-center space-x-4">
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
+                  >
+                    <CheckCircle className="w-8 h-8" />
+                  </motion.div>
+                  <div>
+                    <h3 className="text-lg font-bold">Message Received!</h3>
+                    <p className="text-sm text-green-50">Thank you for reaching out. I'll get back to you soon!</p>
+                  </div>
+                </div>
+              </Card>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </section>
   );
 }
