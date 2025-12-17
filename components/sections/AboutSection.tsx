@@ -212,7 +212,7 @@ export default function AboutSection() {
       <ViewResumeModal 
         isOpen={isViewModalOpen} 
         onClose={() => setIsViewModalOpen(false)}
-        resumeUrl="/doc/arfan-3rdyear-appdev-resume-updated.docx"
+        resumeUrl="/doc/arfan-3rdyear-appdev-resume.docx"
       />
     </section>
   );

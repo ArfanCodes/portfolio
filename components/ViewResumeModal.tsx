@@ -14,7 +14,7 @@ interface ViewResumeModalProps {
 export default function ViewResumeModal({ 
   isOpen, 
   onClose,
-  resumeUrl = '/doc/arfan-3rdyear-appdev-resume-updated.docx'
+  resumeUrl = '/doc/arfan-3rdyear-appdev-resume.docx'
 }: ViewResumeModalProps) {
   
   // Disable background scrolling when modal is open

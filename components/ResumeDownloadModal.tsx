@@ -73,7 +73,7 @@ export default function ResumeDownloadModal({ isOpen, onClose }: ResumeDownloadM
 
       // Download the resume
       const link = document.createElement('a');
-      link.href = '/doc/arfan-3rdyear-appdev-resume-updated.docx';
+      link.href = '/doc/arfan-3rdyear-appdev-resume.docx';
       link.download = 'Mohammed_Arfan_Resume.docx';
       document.body.appendChild(link);
       link.click();
