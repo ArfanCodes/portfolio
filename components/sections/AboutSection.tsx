@@ -9,8 +9,8 @@ import ViewResumeModal from '@/components/ViewResumeModal';
 
 const stats = [
   { 
-    value: '1+', 
-    label: 'Years building mobile apps'
+    value: '3+', 
+    label: 'Years building production apps'
   },
   { 
     value: '3+', 
