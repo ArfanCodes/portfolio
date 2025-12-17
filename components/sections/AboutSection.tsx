@@ -2,217 +2,218 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { Smartphone, Rocket, Globe, Trophy } from 'lucide-react';
+import { Eye, FolderGit2, Mail } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { useState } from 'react';
+import ViewResumeModal from '@/components/ViewResumeModal';
 
 const stats = [
   { 
-    icon: Smartphone, 
-    value: '1 + year', 
-    label: 'Experience in Mobile Dev', 
-    gradient: 'from-blue-500 via-blue-600 to-cyan-500',
-    iconBg: 'from-blue-100 to-cyan-50'
+    value: '1+', 
+    label: 'Years building mobile apps'
   },
   { 
-    icon: Rocket, 
     value: '3+', 
-    label: 'Projects Delivered End-to-End', 
-    gradient: 'from-purple-500 via-purple-600 to-pink-500',
-    iconBg: 'from-purple-100 to-pink-50'
+    label: 'Production projects delivered'
   },
   { 
-    icon: Globe, 
-    value: '1', 
-    label: 'Apps Published / Deployed', 
-    gradient: 'from-green-500 via-emerald-600 to-teal-500',
-    iconBg: 'from-green-100 to-teal-50'
+    value: '2', 
+    label: 'Hackathon awards'
   },
   { 
-    icon: Trophy, 
-    value: '2+', 
-    label: 'Wins in Hackathons', 
-    gradient: 'from-orange-500 via-red-500 to-pink-500',
-    iconBg: 'from-orange-100 to-pink-50'
+    value: '5+', 
+    label: 'Technologies mastered'
   },
 ];
 
 export default function AboutSection() {
+  const [isViewModalOpen, setIsViewModalOpen] = useState(false);
+
+  const scrollToProjects = () => {
+    const projectsSection = document.getElementById('projects');
+    projectsSection?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contact');
+    contactSection?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <section 
       id="about" 
-      className="min-h-screen flex items-center justify-center px-6 lg:px-8 pt-20 relative overflow-hidden"
+      className="min-h-screen flex items-center justify-center px-6 lg:px-8 pt-20 pb-12 relative overflow-hidden bg-white"
     >
       {/* Subtle gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-neutral-50 via-white to-neutral-100 opacity-60" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(120,120,120,0.05)_0%,transparent_50%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(100,100,100,0.05)_0%,transparent_50%)]" />
       
-      <div className="max-w-6xl mx-auto w-full relative z-10">
-        {/* App Developer Title with Word Animation */}
+      {/* Content with exit transition */}
+      <motion.div
+        initial={{ opacity: 1, y: 0 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -16 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.45, ease: 'easeOut' }}
+        className="max-w-6xl mx-auto w-full relative z-10"
+      >
+        {/* Revamped Headline System */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.6 }}
+          className="text-center mb-8 lg:mb-12"
         >
-          <div className="text-5xl lg:text-7xl font-bold text-neutral-900 mb-2">
-            {['App', 'Developer'].map((word, wordIndex) => (
-              <motion.span
-                key={word}
-                initial={{ opacity: 0, y: 100 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ 
-                  duration: 0.8, 
-                  delay: 0.3 + wordIndex * 0.2,
-                  type: 'spring',
-                  stiffness: 100
-                }}
-                className="inline-block mr-4"
-              >
-                {word.split('').map((char, charIndex) => (
-                  <motion.span
-                    key={charIndex}
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ 
-                      duration: 0.5, 
-                      delay: 0.4 + wordIndex * 0.2 + charIndex * 0.05,
-                      type: 'spring',
-                      stiffness: 120
-                    }}
-                    className="inline-block"
-                  >
-                    {char}
-                  </motion.span>
-                ))}
-              </motion.span>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* About Me Section with Profile Image */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="mb-16"
-        >
-          <motion.h2 
-            className="text-3xl lg:text-4xl font-bold mb-12 text-center bg-gradient-to-r from-neutral-900 via-neutral-700 to-neutral-900 bg-clip-text text-transparent"
+          {/* Primary Headline - Strong, Specific */}
+          <motion.h1 
+            className="text-5xl lg:text-7xl font-bold text-[#1F2937] mb-4 tracking-tight"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
           >
-            About Me
-          </motion.h2>
+            React Native App Developer
+          </motion.h1>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-            {/* Circular Profile Image with Radiant Border */}
-            <motion.div
-              initial={{ opacity: 0, x: -50, scale: 0.8 }}
-              animate={{ opacity: 1, x: 0, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.6, type: 'spring', stiffness: 100 }}
-              className="flex justify-center items-center"
-            >
-              <div className="relative">
-                {/* Radiant border effect */}
-                <div className="absolute -inset-1 bg-gradient-to-r from-neutral-200 via-neutral-400 to-neutral-200 rounded-full blur-sm opacity-75 animate-pulse" />
-                <div className="absolute -inset-2 bg-gradient-to-r from-neutral-300 via-neutral-100 to-neutral-300 rounded-full blur-md opacity-50" />
-                
-                {/* Profile image container */}
-                <div className="relative w-64 h-64 lg:w-80 lg:h-80">
-                  <div className="absolute inset-0 bg-gradient-to-br from-neutral-100 to-neutral-200 rounded-full" />
-                  <div className="absolute inset-0 flex items-center justify-center rounded-full border-4 border-white overflow-hidden bg-white shadow-2xl">
-                    <Image
-                      src="/images/profile.png"
-                      alt="Mohammed Arfan"
-                      fill
-                      className="object-cover"
-                      priority
-                    />
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+          {/* Sub-headline - Value-Based */}
+          <motion.p 
+            className="text-lg lg:text-xl text-neutral-600 max-w-3xl mx-auto mb-4 leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.18 }}
+          >
+            Building production-ready mobile apps with clean architecture and real-world impact
+          </motion.p>
 
-            {/* About Content */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.7 }}
-              className="space-y-6"
-            >
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.8 }}
-              >
-                <h3 className="text-2xl lg:text-3xl font-bold mb-4 bg-gradient-to-r from-neutral-800 via-neutral-600 to-neutral-800 bg-clip-text text-transparent">
-                  Hi, I'm Mohammed Arfan
-                </h3>
-                <motion.p 
-                  className="text-base text-neutral-600 leading-relaxed mb-4"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.9 }}
-                >
-                  I'm <span className="font-bold text-neutral-900">Mohammed Arfan</span>, a <span className="font-bold text-neutral-900">3rd year engineering student</span> at <span className="font-bold text-neutral-900">Muffakham Jah College of Engineering & Technology (MJCET)</span> and a <span className="font-bold text-neutral-900">React Native app developer</span> who enjoys building <span className="font-semibold text-neutral-900">clean, scalable and intuitive mobile applications</span>. I focus on turning real-world problems into functional and thoughtfully designed digital experiences, whether that involves <span className="font-semibold text-neutral-900">efficient state management, modern UI patterns or seamless backend integrations</span>.
-                </motion.p>
-                <motion.p 
-                  className="text-base text-neutral-600 leading-relaxed"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 1 }}
-                >
-                  Beyond academics and development work, I stay deeply involved in <span className="font-semibold text-neutral-900">community-driven tech initiatives</span>. As the <span className="font-bold text-neutral-900">Technical Head of IEEE CIS MJCET</span> and a <span className="font-bold text-neutral-900">Cloud Core Member at GDG</span>, I lead workshops, mentor student developers and contribute to events that encourage <span className="font-semibold text-neutral-900">practical learning and innovation</span>.
-                </motion.p>
-              </motion.div>
+          {/* Name as Credibility Element */}
+          <motion.p 
+            className="text-sm text-neutral-500"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.26 }}
+          >
+            Mohammed Arfan · App Developer
+          </motion.p>
+        </motion.div>
 
-              {/* Stats with Icons */}
-              <div className="grid grid-cols-2 gap-4 pt-6">
-                {stats.map((stat, index) => (
-                  <motion.div
-                    key={stat.label}
-                    initial={{ opacity: 0, y: 20, scale: 0.9 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    transition={{ 
-                      duration: 0.5, 
-                      delay: 1.1 + index * 0.1,
-                      type: 'spring',
-                      stiffness: 200
-                    }}
-                    whileHover={{ 
-                      scale: 1.05, 
-                      y: -5,
-                      transition: { duration: 0.2 }
-                    }}
-                    className="bg-white rounded-2xl p-4 border border-neutral-200 shadow-sm hover:shadow-md transition-all duration-300 group"
-                  >
-                    <div className="flex items-center space-x-3">
-                      <div className={`p-3 rounded-xl bg-gradient-to-br ${stat.iconBg} group-hover:scale-110 transition-transform duration-300 shadow-sm`}>
-                        <stat.icon 
-                          className="w-5 h-5"
-                          strokeWidth={2.5}
-                          style={{
-                            stroke: index === 0 ? '#3b82f6' : 
-                                   index === 1 ? '#a855f7' : 
-                                   index === 2 ? '#10b981' : 
-                                   '#f97316'
-                          }}
-                        />
-                      </div>
-                      <div>
-                        <div className="text-2xl font-bold text-neutral-900">{stat.value}</div>
-                        <div className="text-xs text-neutral-600">{stat.label}</div>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
+        {/* Profile Image - Centered */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.34 }}
+          className="flex justify-center mb-8 lg:mb-12"
+        >
+          <div className="relative group">
+            {/* Neutral radial gradient glow */}
+            <div className="absolute -inset-2 bg-gradient-to-r from-neutral-200 via-transparent to-neutral-200 rounded-full blur-md opacity-30" />
+            
+            {/* Profile image container */}
+            <div className="relative w-48 h-48 lg:w-56 lg:h-56">
+              {/* Subtle shadow under image */}
+              <div className="absolute inset-0 bg-neutral-900 rounded-full blur-xl opacity-10 translate-y-2" />
+              
+              {/* Image with hover ring */}
+              <div className="relative w-full h-full rounded-full overflow-hidden bg-white shadow-lg border-2 border-transparent group-hover:border-neutral-300 transition-all duration-300">
+                <Image
+                  src="/images/profile.png"
+                  alt="Mohammed Arfan"
+                  fill
+                  className="object-cover"
+                  priority
+                />
               </div>
-            </motion.div>
+            </div>
           </div>
         </motion.div>
-      </div>
+
+        {/* Description + Bullets */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.42 }}
+          className="max-w-3xl mx-auto mb-8 text-center"
+        >
+          <p className="text-base text-neutral-700 leading-relaxed mb-4">
+            I'm a 3rd year engineering student at <strong className="text-neutral-900">MJCET</strong> who enjoys building clean, scalable and intuitive mobile applications. I focus on turning real-world problems into functional and thoughtfully designed digital experiences.
+          </p>
+          
+          <p className="text-base text-neutral-700 leading-relaxed">
+            As <strong className="text-neutral-900">Technical Head, IEEE CIS MJCET</strong> and <strong className="text-neutral-900">Cloud Core Member, GDG</strong>, I lead workshops, mentor student developers and contribute to events that encourage practical learning and innovation.
+          </p>
+        </motion.div>
+
+        {/* CTAs - Primary, Secondary, Tertiary */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
+        >
+          {/* Primary CTA - Filled */}
+          <Button
+            onClick={() => setIsViewModalOpen(true)}
+            className="w-full sm:w-auto bg-[#1F2937] hover:bg-[#111827] text-white px-8 py-3 rounded-full text-base font-semibold shadow-md hover:shadow-lg transition-all duration-300"
+          >
+            <Eye className="w-4 h-4 mr-2" />
+            View Resume
+          </Button>
+
+          {/* Secondary CTA - Outline */}
+          <Button
+            onClick={scrollToProjects}
+            variant="outline"
+            className="w-full sm:w-auto border-2 border-[#1F2937] text-[#1F2937] hover:bg-[#1F2937] hover:text-white px-8 py-3 rounded-full text-base font-semibold transition-all duration-300"
+          >
+            <FolderGit2 className="w-4 h-4 mr-2" />
+            View Projects
+          </Button>
+
+          {/* Tertiary CTA - Text Only */}
+          <button
+            onClick={scrollToContact}
+            className="text-sm font-medium text-neutral-600 hover:text-[#1F2937] transition-colors duration-200 underline-offset-4 hover:underline"
+          >
+            Contact
+          </button>
+        </motion.div>
+
+        {/* Stats - Neutral, Earned Feel */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.58 }}
+          className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto"
+        >
+          {stats.map((stat, index) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ 
+                duration: 0.4, 
+                delay: 0.66 + index * 0.08
+              }}
+              className="bg-white rounded-xl p-5 border border-neutral-200 shadow-sm hover:shadow-md transition-all duration-300 text-center"
+            >
+              {/* Bold Number Only */}
+              <div className="text-3xl lg:text-4xl font-bold text-[#1F2937] mb-2">
+                {stat.value}
+              </div>
+              {/* Small Descriptor */}
+              <div className="text-xs text-neutral-600 leading-tight">
+                {stat.label}
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </motion.div>
+
+      {/* View Resume Modal */}
+      <ViewResumeModal 
+        isOpen={isViewModalOpen} 
+        onClose={() => setIsViewModalOpen(false)}
+        resumeUrl="/doc/arfan-3rdyear-appdev-resume-updated.docx"
+      />
     </section>
   );
 }
-
