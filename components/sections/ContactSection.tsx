@@ -29,7 +29,7 @@ const socialLinks = [
 ];
 
 const trustSignals = [
-  '3+ years building production apps',
+  '1+ years building production apps',
   'IEEE-CIS Technical Head',
   'Clean, scalable React Native builds',
 ];
