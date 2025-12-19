@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Mohammed Arfan",
-  description: "Portfolio of Mohammed Arfan - React Native app developer specializing in clean, scalable mobile applications. Technical Head at IEEE-CIS MJCET & Cloud Core Member at GDSC.",
+  title: "Portfolio Website",
+  description: "Portfolio Website - Under Maintenance",
   icons: {
     icon: '/images/btf.png',
     apple: '/images/btf.png',
