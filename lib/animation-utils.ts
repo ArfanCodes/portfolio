@@ -63,14 +63,6 @@ export const sectionHandoff = {
     transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const, delay: 0.1 },
   },
   
-  // Resume section - smooth entry
-  resume: {
-    viewport: { once: true, amount: 0.15, margin: '0px 0px -15% 0px' },
-    initial: { opacity: 0, y: 16 },
-    whileInView: { opacity: 1, y: 0 },
-    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const, delay: 0.1 },
-  },
-  
   // Contact section - final entry
   contact: {
     viewport: { once: true, amount: 0.15, margin: '0px 0px -10% 0px' },

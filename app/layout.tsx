@@ -13,13 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio Website",
-  description: "Portfolio Website - Under Maintenance",
-  icons: {
-    icon: '/images/btf.png',
-    apple: '/images/btf.png',
-    shortcut: '/images/btf.png',
-  },
+  title: "Mohammed Arfan | App Developer",
+  description: "Production-ready mobile apps and full-stack development portfolio.",
 };
 
 export default function RootLayout({
