@@ -85,14 +85,14 @@ const skillCategories = [
   },
 ];
 
-export default function ResumeSection() {
+export default function SkillsSection() {
   const totalSkills = skillCategories.reduce(
     (acc, cat) => acc + cat.primarySkills.length + cat.secondarySkills.length,
     0
   );
 
   return (
-    <section id="resume" className="min-h-screen py-24 px-6 lg:px-8 bg-gradient-to-br from-white via-[#FFF9EB] to-white relative overflow-hidden">
+    <section id="skills" className="min-h-screen py-24 px-6 lg:px-8 bg-gradient-to-br from-white via-[#FFF9EB] to-white relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-40 right-10 w-96 h-96 bg-[#9FB2AC]/15 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob" />

@@ -10,7 +10,7 @@ const navItems = [
   { name: 'Projects', href: '#projects' },
   { name: 'Experience', href: '#experience' },
   { name: 'Achievements', href: '#achievements' },
-  { name: 'Resume', href: '#resume' },
+  { name: 'Skills', href: '#skills' },
 ];
 
 export default function Navigation() {
