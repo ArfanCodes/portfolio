@@ -217,7 +217,10 @@ export default function ContactSection() {
             {/* Availability Card */}
             <div className="bg-gradient-to-br from-[#5D0D18] to-[#4A0A12] rounded-2xl p-8 shadow-xl text-white">
               <div className="flex items-start gap-3 mb-4">
-                <div className="w-3 h-3 bg-green-400 rounded-full mt-1.5 animate-pulse" />
+                <div className="relative flex h-3 w-3 mt-1.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                </div>
                 <div>
                   <h3 className="text-xl font-bold mb-2">Available for Projects</h3>
                   <p className="text-sm text-white/90 leading-relaxed">
