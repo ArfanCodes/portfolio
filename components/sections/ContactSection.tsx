@@ -43,14 +43,15 @@ export default function ContactSection() {
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('success') === 'true') {
       setShowSuccess(true);
-      setTimeout(() => setShowSuccess(false), 5000);
+      setTimeout(() => setShowSuccess(false), 6000);
       window.history.replaceState({}, '', window.location.pathname + '#contact');
     }
   }, []);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
     setIsSubmitting(true);
+    // FormSubmit will handle the actual submission
+    // The form will redirect to ?success=true after submission
   };
 
   return (
@@ -107,7 +108,19 @@ export default function ContactSection() {
                 <p className="text-sm text-neutral-600">Fill out the form below and I'll get back to you within 24 hours</p>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form 
+                action="https://formsubmit.co/arfaanmohammed56@gmail.com" 
+                method="POST"
+                onSubmit={handleSubmit} 
+                className="space-y-6"
+              >
+                {/* FormSubmit Configuration - Hidden Fields */}
+                <input type="hidden" name="_subject" value="New Contact Form Submission - Portfolio" />
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="hidden" name="_template" value="table" />
+                <input type="text" name="_honey" style={{ display: 'none' }} />
+                <input type="hidden" name="_next" value={typeof window !== 'undefined' ? `${window.location.origin}${window.location.pathname}?success=true#contact` : ''} />
+
                 {/* Name Field */}
                 <div>
                   <label htmlFor="name" className="block text-sm font-semibold text-[#1A1A1A] mb-2">
@@ -126,13 +139,34 @@ export default function ContactSection() {
                   </div>
                 </div>
 
+                {/* Email Field */}
+                <div>
+                  <label htmlFor="email" className="block text-sm font-semibold text-[#1A1A1A] mb-2">
+                    Your Email *
+                  </label>
+                  <div className="relative">
+                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      className="w-full pl-12 pr-4 py-4 bg-neutral-50 border-2 border-[#9FB2AC]/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#5D0D18] focus:border-transparent transition-all duration-200 text-base"
+                      placeholder="e.g., john@example.com"
+                    />
+                  </div>
+                  <p className="text-xs text-neutral-500 mt-2">
+                    I'll use this to reply to your message
+                  </p>
+                </div>
+
                 {/* Subject Field */}
                 <div>
                   <label htmlFor="subject" className="block text-sm font-semibold text-[#1A1A1A] mb-2">
                     Subject *
                   </label>
                   <div className="relative">
-                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
+                    <MessageSquare className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
                     <input
                       type="text"
                       id="subject"
@@ -174,7 +208,7 @@ export default function ContactSection() {
                   {isSubmitting ? (
                     <>
                       <CheckCircle className="w-5 h-5 mr-2" />
-                      Message Sent ✓
+                      Sending...
                     </>
                   ) : (
                     <>
@@ -279,25 +313,109 @@ export default function ContactSection() {
         </motion.div>
       </div>
 
-      {/* Success Popup */}
+      {/* Success Modal */}
       <AnimatePresence>
         {showSuccess && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed top-8 left-1/2 transform -translate-x-1/2 z-50"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+            onClick={() => setShowSuccess(false)}
           >
-            <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-2xl p-6 shadow-2xl">
-              <div className="flex items-center gap-4">
-                <CheckCircle className="w-8 h-8" />
-                <div>
-                  <h3 className="text-lg font-bold">Message Received!</h3>
-                  <p className="text-sm text-green-50">Thank you for reaching out. I'll get back to you soon!</p>
-                </div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              transition={{ duration: 0.4, type: "spring", bounce: 0.3 }}
+              className="bg-white rounded-3xl p-8 md:p-12 shadow-2xl max-w-md w-full relative overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Decorative Background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 opacity-50" />
+              
+              {/* Animated Success Icon */}
+              <motion.div
+                initial={{ scale: 0, rotate: -180 }}
+                animate={{ scale: 1, rotate: 0 }}
+                transition={{ delay: 0.2, duration: 0.5, type: "spring", bounce: 0.5 }}
+                className="relative z-10 w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center shadow-lg"
+              >
+                <CheckCircle className="w-12 h-12 text-white" strokeWidth={2.5} />
+              </motion.div>
+
+              {/* Content */}
+              <div className="relative z-10 text-center">
+                <motion.h3
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3, duration: 0.4 }}
+                  className="text-3xl font-bold text-[#1A1A1A] mb-3"
+                >
+                  Message Sent! 🎉
+                </motion.h3>
+                
+                <motion.p
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4, duration: 0.4 }}
+                  className="text-base text-neutral-600 mb-2 leading-relaxed"
+                >
+                  Thank you for reaching out! I've received your message and will get back to you within 24 hours.
+                </motion.p>
+
+                <motion.p
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5, duration: 0.4 }}
+                  className="text-sm text-neutral-500 mb-8"
+                >
+                  Check your email for a confirmation copy.
+                </motion.p>
+
+                {/* Close Button */}
+                <motion.button
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6, duration: 0.4 }}
+                  onClick={() => setShowSuccess(false)}
+                  className="w-full bg-gradient-to-r from-[#5D0D18] to-[#4A0A12] hover:from-[#4A0A12] hover:to-[#3A0810] text-white rounded-xl py-4 px-8 font-bold shadow-lg hover:shadow-xl transition-all duration-300"
+                >
+                  Got it, thanks!
+                </motion.button>
               </div>
-            </div>
+
+              {/* Confetti Effect */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3, duration: 0.5 }}
+                className="absolute inset-0 pointer-events-none overflow-hidden"
+              >
+                {[...Array(20)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ y: -20, x: Math.random() * 100 + '%', opacity: 1 }}
+                    animate={{ 
+                      y: '100vh', 
+                      rotate: Math.random() * 360,
+                      opacity: 0 
+                    }}
+                    transition={{ 
+                      duration: Math.random() * 2 + 2,
+                      delay: Math.random() * 0.5,
+                      ease: "easeOut"
+                    }}
+                    className="absolute w-2 h-2 rounded-full"
+                    style={{
+                      backgroundColor: ['#10b981', '#059669', '#34d399', '#6ee7b7', '#a7f3d0'][Math.floor(Math.random() * 5)],
+                      left: `${Math.random() * 100}%`
+                    }}
+                  />
+                ))}
+              </motion.div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
