@@ -7,7 +7,7 @@ A modern, responsive portfolio website showcasing projects, experience, achievem
 ## 🚀 Tech Stack
 
 ### Core Framework
-- **Next.js 16.0.8** - React framework with App Router
+- **Next.js 16.1.1** - React framework with App Router
 - **React 19.2.1** - UI library
 - **TypeScript 5** - Type-safe development
 
@@ -25,6 +25,11 @@ A modern, responsive portfolio website showcasing projects, experience, achievem
 - **Zustand 5.0** - Lightweight state management
 - **Class Variance Authority** - Component variant management
 - **clsx & tailwind-merge** - Conditional class management
+
+### Analytics & Integrations
+- **Google Analytics 4** - Visitor tracking and analytics
+- **FormSubmit** - Contact form email delivery
+- **nextjs-google-analytics** - GA4 integration for Next.js
 
 ## 📋 Prerequisites
 
@@ -59,8 +64,10 @@ If you're interested in working together or have questions about my work, please
 - Intersection Observer-based section reveals
 - Mobile-optimized hamburger navigation
 - Form validation and submission handling
+- Animated success modal with confetti effects
 - Modal dialogs for resume viewing and downloading
 - Professional typography and spacing
+- Google Analytics visitor tracking
 
 ### Performance Optimizations
 - Next.js App Router for optimal performance
