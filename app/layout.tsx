@@ -63,6 +63,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Apple Touch Icon for iOS Safari */}
+        <link rel="apple-touch-icon" href="/apple-icon" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon" />
+        
+        {/* Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
