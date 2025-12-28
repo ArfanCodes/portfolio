@@ -119,7 +119,7 @@ export default function ContactSection() {
                 <input type="hidden" name="_captcha" value="false" />
                 <input type="hidden" name="_template" value="table" />
                 <input type="text" name="_honey" style={{ display: 'none' }} />
-                <input type="hidden" name="_next" value={typeof window !== 'undefined' ? `${window.location.origin}${window.location.pathname}?success=true#contact` : ''} />
+                <input type="hidden" name="_next" value="https://arfaan.me/?success=true#contact" />
 
                 {/* Name Field */}
                 <div>
