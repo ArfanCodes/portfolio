@@ -109,7 +109,7 @@ export default function ContactSection() {
               </div>
 
               <form 
-                action="https://formsubmit.co/arfaanmohammed56@gmail.com" 
+                action={`https://formsubmit.co/${process.env.NEXT_PUBLIC_CONTACT_EMAIL}`}
                 method="POST"
                 onSubmit={handleSubmit} 
                 className="space-y-6"
