@@ -15,20 +15,29 @@ export default function Icon() {
       // ImageResponse JSX element
       <div
         style={{
-          fontSize: 20,
-          background: 'linear-gradient(to bottom right, #5D0D18, #4A0A12)',
           width: '100%',
           height: '100%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          color: 'white',
-          borderRadius: '20%', // Rounded square
-          fontWeight: 800,
-          fontFamily: 'sans-serif',
+          background: '#0C1519',
+          borderRadius: '30%',
+          border: '2px solid #CF9D7B',
         }}
       >
-        MA
+        <div
+          style={{
+            fontSize: 20,
+            background: '#CF9D7B',
+            backgroundClip: 'text',
+            color: 'transparent',
+            fontWeight: 700,
+            fontFamily: '"Times New Roman", Times, serif',
+            letterSpacing: '-0.05em',
+          }}
+        >
+          MA
+        </div>
       </div>
     ),
     // ImageResponse options

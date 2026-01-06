@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { FileText, Smartphone, Code, Server, Database, Wrench, CheckCircle, Sparkles } from 'lucide-react';
+import { FileText, Smartphone, Code, Server, Database, Wrench, CheckCircle, Zap } from 'lucide-react';
 import { 
   SiReact, 
   SiTypescript, 
@@ -28,10 +28,10 @@ const skillCategories = [
       { name: 'TypeScript', icon: SiTypescript, color: '#3178C6' },
     ],
     secondarySkills: [
-      { name: 'Expo', icon: SiReact, color: '#000020' },
+      { name: 'Expo', icon: SiReact, color: '#ffffff' },
       { name: 'Appwrite', icon: FileText, color: '#F02E65' },
       { name: 'AsyncStorage', icon: FileText, color: '#61DAFB' },
-      { name: 'Zustand', icon: SiReact, color: '#443E38' },
+      { name: 'Zustand', icon: SiReact, color: '#ffffff' },
     ],
   },
   {
@@ -51,7 +51,7 @@ const skillCategories = [
     icon: Server,
     primarySkills: [
       { name: 'Node.js', icon: SiNodedotjs, color: '#339933' },
-      { name: 'Express.js', icon: SiExpress, color: '#000000' },
+      { name: 'Express.js', icon: SiExpress, color: '#ffffff' },
     ],
     secondarySkills: [
       { name: 'FastAPI', icon: SiFastapi, color: '#009688' },
@@ -68,7 +68,7 @@ const skillCategories = [
     secondarySkills: [
       { name: 'SQLite', icon: SiSqlite, color: '#003B57' },
       { name: 'AWS', icon: SiAmazon, color: '#FF9900' },
-      { name: 'Prisma', icon: SiPrisma, color: '#2D3748' },
+      { name: 'Prisma', icon: SiPrisma, color: '#ffffff' },
     ],
   },
   {
@@ -76,7 +76,7 @@ const skillCategories = [
     icon: Wrench,
     primarySkills: [
       { name: 'Git', icon: SiGit, color: '#F05032' },
-      { name: 'GitHub', icon: SiGithub, color: '#181717' },
+      { name: 'GitHub', icon: SiGithub, color: '#ffffff' },
     ],
     secondarySkills: [
       { name: 'React Query', icon: SiReact, color: '#FF4154' },
@@ -92,17 +92,24 @@ export default function SkillsSection() {
   );
 
   return (
-    <section id="skills" className="min-h-screen py-24 px-6 lg:px-8 bg-gradient-to-br from-white via-[#FFF9EB] to-white relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-40 right-10 w-96 h-96 bg-[#9FB2AC]/15 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob" />
-        <div className="absolute bottom-40 left-10 w-96 h-96 bg-[#5D0D18]/10 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000" />
+    <section id="skills" className="py-24 lg:py-32 relative bg-[#0C1519] overflow-hidden text-[#E0E0E0]">
+      
+      {/* Background Decor: Matrix Grid */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-10">
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <pattern id="smallGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+                    <circle cx="1" cy="1" r="1" fill="#CF9D7B" />
+                </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#smallGrid)" />
+        </svg>
       </div>
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
@@ -115,44 +122,41 @@ export default function SkillsSection() {
             transition={{ delay: 0.2 }}
             className="inline-block mb-4"
           >
-            <span className="px-4 py-2 bg-gradient-to-r from-[#5D0D18] to-[#4A0A12] text-white rounded-full text-sm font-semibold shadow-lg">
-              Technical Expertise
+            <span className="px-4 py-2 bg-[#CF9D7B]/10 border border-[#CF9D7B]/20 text-[#CF9D7B] rounded-full text-sm font-bold tracking-wide shadow-lg">
+              TECHNICAL EXPERTISE
             </span>
           </motion.div>
-
-          <h2 className="text-5xl lg:text-6xl font-bold text-[#1A1A1A] mb-6 tracking-tight">
-            Skills & Technologies
+          
+          <h2 className="text-5xl lg:text-7xl font-bold text-[#E0E0E0] mb-6 tracking-tight">
+            Skills & <span className="text-[#CF9D7B]">Technologies</span>
           </h2>
           
-          <p className="text-lg text-[#555555] max-w-2xl mx-auto leading-relaxed mb-8">
-            A comprehensive overview of my technical expertise across mobile, web, and cloud development
+          <p className="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed mb-10">
+            A comprehensive arsenal of tools for building scalable, high-performance applications.
           </p>
 
-          {/* Stats */}
-          <div className="flex justify-center gap-8 flex-wrap">
-            <div className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-[#5D0D18] to-[#4A0A12] flex items-center justify-center">
-                <Sparkles className="w-5 h-5 text-white" />
-              </div>
-              <div className="text-left">
-                <div className="text-2xl font-bold text-[#1A1A1A]">{totalSkills}+</div>
-                <div className="text-sm text-neutral-600">Technologies</div>
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-[#5D0D18] to-[#4A0A12] flex items-center justify-center">
-                <CheckCircle className="w-5 h-5 text-white" />
-              </div>
-              <div className="text-left">
-                <div className="text-2xl font-bold text-[#1A1A1A]">{skillCategories.length}</div>
-                <div className="text-sm text-neutral-600">Categories</div>
-              </div>
-            </div>
+          {/* Stats Bar */}
+          <div className="inline-flex items-center gap-8 lg:gap-12 px-8 py-4 bg-[#162127]/50 rounded-2xl border border-[#3A3534] backdrop-blur-sm">
+             <div className="flex items-center gap-3">
+                <div className="p-2 bg-[#CF9D7B] rounded-lg text-[#0C1519]"><Zap size={20} /></div>
+                <div className="text-left leading-tight">
+                   <div className="text-xl font-bold text-[#E0E0E0]">{totalSkills}+</div>
+                   <div className="text-xs text-[#CF9D7B]/70 font-medium uppercase tracking-wide">Technologies</div>
+                </div>
+             </div>
+             <div className="w-px h-10 bg-[#3A3534]" />
+             <div className="flex items-center gap-3">
+                <div className="p-2 bg-[#CF9D7B] rounded-lg text-[#0C1519]"><CheckCircle size={20} /></div>
+                <div className="text-left leading-tight">
+                   <div className="text-xl font-bold text-[#E0E0E0]">{skillCategories.length}</div>
+                   <div className="text-xs text-[#CF9D7B]/70 font-medium uppercase tracking-wide">Domains</div>
+                </div>
+             </div>
           </div>
         </motion.div>
 
         {/* Skills Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {skillCategories.map((category, index) => {
             const CategoryIcon = category.icon;
             
@@ -163,102 +167,80 @@ export default function SkillsSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -8 }}
-                className="group"
+                whileHover={{ y: -5 }}
+                className="group h-full"
               >
-                <div className="relative bg-white rounded-2xl p-8 shadow-xl border-2 border-[#9FB2AC]/30 hover:border-[#5D0D18] hover:shadow-2xl transition-all duration-500 h-full">
-                  {/* Icon */}
-                  <div className="mb-6">
-                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-neutral-100 to-neutral-50 border-2 border-[#9FB2AC]/30 flex items-center justify-center group-hover:border-[#5D0D18] transition-colors duration-300">
-                      <CategoryIcon className="w-7 h-7 text-[#9FB2AC] group-hover:text-[#5D0D18] transition-colors duration-300" />
-                    </div>
+                <div className="relative bg-[#162127] backdrop-blur-md rounded-3xl p-8 border border-[#3A3534] hover:border-[#CF9D7B]/50 hover:bg-[#162127]/80 transition-all duration-300 h-full flex flex-col shadow-xl">
+                  
+                  {/* Category Header */}
+                  <div className="flex items-start justify-between mb-8">
+                     <div className="p-3 rounded-xl bg-gradient-to-br from-[#724B39] to-[#5C3A2A] text-[#E0E0E0] shadow-lg shadow-[#724B39]/20 group-hover:scale-110 transition-transform duration-300">
+                        <CategoryIcon size={24} />
+                     </div>
+                     <div className="text-right">
+                        <h3 className="text-lg font-bold text-[#E0E0E0] leading-tight mb-1">{category.title}</h3>
+                        <span className="text-xs font-medium text-[#CF9D7B]/60 uppercase tracking-wider">Module {index + 1}</span>
+                     </div>
                   </div>
 
-                  {/* Title */}
-                  <h3 className="text-xl font-bold text-[#1A1A1A] mb-6 group-hover:text-[#5D0D18] transition-colors duration-300">
-                    {category.title}
-                  </h3>
-
-                  {/* Primary Skills */}
-                  <div className="mb-5">
-                    <h4 className="text-xs font-bold text-[#5D0D18] uppercase tracking-wider mb-3">
-                      Core Skills
+                  {/* Primary Skills (Core) */}
+                  <div className="mb-8">
+                    <h4 className="flex items-center gap-2 text-xs font-bold text-[#CF9D7B] uppercase tracking-wider mb-4 opacity-80">
+                       <span className="w-1.5 h-1.5 rounded-full bg-[#CF9D7B]" /> Core Stack
                     </h4>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="grid grid-cols-1 gap-3">
                       {category.primarySkills.map((skill) => {
                         const IconComponent = skill.icon;
                         return (
-                          <motion.div
+                          <div
                             key={skill.name}
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.3 }}
-                            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-[#5D0D18]/10 to-[#4A0A12]/10 border border-[#5D0D18]/30 shadow-sm"
+                            className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[#0C1519]/60 border border-[#3A3534] group-hover:border-[#CF9D7B]/40 transition-colors"
                           >
                             <IconComponent 
-                              className="w-4 h-4" 
-                              style={{ color: skill.color }}
+                              className="w-5 h-5 flex-shrink-0" 
+                              style={{ color: skill.color === '#ffffff' ? '#CF9D7B' : skill.color }}
                             />
-                            <span className="text-sm font-semibold text-[#1A1A1A]">
+                            <span className="text-base font-bold text-[#E0E0E0]">
                               {skill.name}
                             </span>
-                          </motion.div>
+                          </div>
                         );
                       })}
                     </div>
                   </div>
 
-                  {/* Secondary Skills */}
-                  <div>
-                    <h4 className="text-xs font-bold text-neutral-500 uppercase tracking-wider mb-3">
-                      Additional
+                  {/* Secondary Skills (Toolkit) */}
+                  <div className="mt-auto">
+                    <h4 className="text-xs font-bold text-[#A0A0A0] uppercase tracking-wider mb-3 pl-1">
+                       Additional Toolkit
                     </h4>
                     <div className="flex flex-wrap gap-2">
                       {category.secondarySkills.map((skill) => {
                         const IconComponent = skill.icon;
                         return (
-                          <motion.div
+                          <div
                             key={skill.name}
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.3 }}
-                            className="flex items-center gap-2 px-3 py-1.5 bg-white rounded-lg border border-neutral-300 hover:border-[#5D0D18] hover:bg-[#9FB2AC]/10 transition-all duration-200 shadow-sm"
+                            className="flex items-center gap-1.5 px-3 py-1.5 bg-[#0C1519]/40 rounded-lg border border-[#3A3534] hover:bg-[#0C1519] hover:border-[#CF9D7B]/30 transition-colors cursor-default"
                           >
                             <IconComponent 
-                              className="w-3.5 h-3.5" 
-                              style={{ color: skill.color }}
+                              className="w-3.5 h-3.5 opacity-70" 
+                              style={{ color: skill.color === '#ffffff' ? '#A0A0A0' : skill.color }}
                             />
-                            <span className="text-xs font-medium text-neutral-700">
+                            <span className="text-xs font-medium text-[#A0A0A0]">
                               {skill.name}
                             </span>
-                          </motion.div>
+                          </div>
                         );
                       })}
                     </div>
                   </div>
+
                 </div>
               </motion.div>
             );
           })}
         </div>
       </div>
-
-      {/* CSS for blob animation */}
-      <style jsx>{`
-        @keyframes blob {
-          0%, 100% { transform: translate(0, 0) scale(1); }
-          33% { transform: translate(30px, -50px) scale(1.1); }
-          66% { transform: translate(-20px, 20px) scale(0.9); }
-        }
-        .animate-blob {
-          animation: blob 7s infinite;
-        }
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-      `}</style>
     </section>
   );
 }

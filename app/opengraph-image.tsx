@@ -19,8 +19,8 @@ export default async function Image() {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: '#FFF9EB',
-          backgroundImage: 'linear-gradient(to bottom right, #FFF9EB, #FFFFFF)',
+          backgroundColor: '#0C1519',
+          backgroundImage: 'linear-gradient(to bottom right, #0C1519, #162127)',
         }}
       >
         {/* Main Content */}
@@ -38,7 +38,7 @@ export default async function Image() {
             style={{
               fontSize: 72,
               fontWeight: 800,
-              background: 'linear-gradient(to right, #5D0D18, #4A0A12)',
+              background: 'linear-gradient(to right, #CF9D7B, #724B39)',
               backgroundClip: 'text',
               color: 'transparent',
               marginBottom: 20,
@@ -53,7 +53,7 @@ export default async function Image() {
             style={{
               fontSize: 48,
               fontWeight: 600,
-              color: '#1A1A1A',
+              color: '#E0E0E0',
               marginBottom: 30,
             }}
           >
@@ -64,7 +64,7 @@ export default async function Image() {
           <div
             style={{
               fontSize: 28,
-              color: '#555555',
+              color: '#A0A0A0',
               textAlign: 'center',
               maxWidth: 800,
               lineHeight: 1.4,
@@ -77,7 +77,7 @@ export default async function Image() {
           <div
             style={{
               fontSize: 24,
-              color: '#5D0D18',
+              color: '#CF9D7B',
               marginTop: 40,
               fontWeight: 600,
             }}
@@ -86,7 +86,7 @@ export default async function Image() {
           </div>
         </div>
 
-        {/* Decorative Elements */}
+        {/* Decorative Logo Badge */}
         <div
           style={{
             position: 'absolute',
@@ -95,13 +95,13 @@ export default async function Image() {
             width: 100,
             height: 100,
             borderRadius: 20,
-            background: 'linear-gradient(135deg, #5D0D18, #4A0A12)',
+            background: 'linear-gradient(135deg, #CF9D7B, #724B39)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             fontSize: 40,
             fontWeight: 800,
-            color: 'white',
+            color: '#0C1519',
           }}
         >
           MA

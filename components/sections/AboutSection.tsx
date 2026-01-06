@@ -1,9 +1,24 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
-import { FolderGit2, TrendingUp, Award, Code } from 'lucide-react';
+import { FolderGit2, TrendingUp, Award, Code, ArrowRight, Github, Linkedin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useRef } from 'react';
+
+// Custom X Logo Component
+const XLogo = ({ size = 24, className = "" }: { size?: number, className?: string }) => (
+  <svg 
+    width={size} 
+    height={size} 
+    viewBox="0 0 24 24" 
+    fill="currentColor" 
+    className={className}
+    aria-hidden="true"
+  >
+    <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
+  </svg>
+);
 
 const stats = [
   { 
@@ -29,6 +44,13 @@ const stats = [
 ];
 
 export default function AboutSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
 
   const scrollToProjects = () => {
     const projectsSection = document.getElementById('projects');
@@ -42,157 +64,194 @@ export default function AboutSection() {
 
   return (
     <section 
+      ref={sectionRef}
       id="about" 
-      className="min-h-screen flex items-center justify-center px-6 lg:px-8 pt-24 pb-16 relative overflow-hidden bg-gradient-to-br from-[#FFF9EB] via-white to-[#FFF9EB]"
+      className="relative min-h-screen flex items-center py-20 lg:py-32 overflow-hidden bg-[#0C1519]"
     >
-      {/* Content */}
-      <div className="max-w-7xl mx-auto w-full relative z-10">
-        {/* Centered Headings at Top */}
-        <div className="text-center mb-16">
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-5xl lg:text-6xl font-bold mb-6 leading-tight text-[#1A1A1A]"
-          >
-            App Developer
-          </motion.h1>
+      {/* Background Decor - Dynamic Gradients */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#CF9D7B]/10 blur-[120px] rounded-full opacity-50 animate-pulse" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#724B39]/10 blur-[120px] rounded-full opacity-50" />
+      </div>
+
+      <div className="container mx-auto px-6 lg:px-8 relative z-10" ref={containerRef}>
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start">
           
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="text-xl lg:text-2xl leading-relaxed max-w-3xl mx-auto text-[#555555]"
-          >
-            Building production-ready mobile apps <span className="text-[#5D0D18] font-semibold">from ideas</span>
-          </motion.p>
-        </div>
+          {/* LEFT COLUMN - Image Only (Sticky) */}
+          <div className="w-full lg:w-1/2 lg:sticky lg:top-16 lg:self-start">
+            
+            {/* Title Block */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center"
+            >
+              <h1 className="text-4xl lg:text-6xl font-bold tracking-tight text-[#CF9D7B] mb-2 font-playfair">
+                App Developer
+              </h1>
+              <div className="h-2 w-20 bg-[#724B39] rounded-full mx-auto mb-6" />
+            </motion.div>
 
-        {/* Main Content Grid - Equal Height */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start mb-16">
-          {/* Left Side - Profile Image */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: 'easeOut', delay: 0.4 }}
-            className="flex justify-center lg:justify-end"
-          >
-            <div className="relative group w-full max-w-md">
-              {/* Profile image container */}
-              <div className="relative w-full aspect-square">
-                {/* Image */}
-                <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl group-hover:scale-[1.02] transition-transform duration-500">
-                  <Image
-                    src="/images/profile.png"
-                    alt="Mohammed Arfan"
-                    fill
-                    className="object-cover"
-                    priority
-                  />
+            <motion.div 
+              className="relative group w-full max-w-md mx-auto"
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden border border-[#CF9D7B]/20 bg-[#162127] shadow-2xl">
+                <Image
+                  src="/images/profile.png"
+                  alt="Mohammed Arfan"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  priority
+                />
+                
+                {/* Overlay Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0C1519]/80 via-transparent to-transparent opacity-80" />
+
+                {/* Badge */}
+                <div className="absolute bottom-6 left-6 bg-[#162127]/90 backdrop-blur-md px-5 py-2.5 rounded-full shadow-lg border border-[#CF9D7B]/30 flex items-center gap-2.5">
+                  <span className="relative flex h-3 w-3">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#CF9D7B] opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-3 w-3 bg-[#CF9D7B]"></span>
+                  </span>
+                  <span className="text-sm font-bold text-[#E0E0E0]">Open to Internships</span>
                 </div>
-
-                {/* Floating badge */}
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ delay: 0.7, type: "spring", stiffness: 200 }}
-                  className="absolute -bottom-4 -right-4 bg-[#5D0D18] text-white px-6 py-3 rounded-full shadow-xl"
-                >
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
-                    <span className="text-sm font-semibold">Open to Internships</span>
-                  </div>
-                </motion.div>
               </div>
-            </div>
-          </motion.div>
 
-          {/* Right Side - Content */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: 'easeOut', delay: 0.5 }}
-            className="space-y-6 flex flex-col justify-center"
-          >
-            {/* Description - 3 Paragraphs, Strategic Bold, Editorial Typography */}
-            <div className="space-y-6 max-w-[65ch]">
-              <p className="text-lg leading-[1.7] text-[#1A1A1A] font-medium">
-                I am a third-year Information Technology student at <span className="font-semibold">Muffakham Jah College of Engineering and Technology</span>, with a strong interest in building <span className="font-semibold">reliable and scalable mobile applications</span> focused on clarity and usability.
+              {/* Decorative Elements behind image */}
+              <div className="absolute -z-10 -bottom-6 -right-6 w-full h-full rounded-[2rem] border-2 border-[#724B39]/50 opacity-60" />
+            </motion.div>
+
+            {/* Social Links - Blending Naturally */}
+            <motion.div 
+              className="flex items-center justify-center gap-6 mt-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              {[
+                { Icon: Github, href: "https://github.com/ArfanCodes" },
+                { Icon: Linkedin, href: "https://linkedin.com/in/" },
+                { Icon: XLogo, href: "https://x.com/" }
+              ].map((social, index) => (
+                <a
+                  key={index}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative p-3 rounded-xl bg-[#162127]/50 border border-[#3A3534]/50 hover:border-[#CF9D7B]/50 hover:bg-[#CF9D7B]/10 transition-all duration-300 hover:-translate-y-1"
+                >
+                  <social.Icon size={20} className="text-[#A0A0A0] group-hover:text-[#CF9D7B] transition-colors" />
+                </a>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* RIGHT COLUMN - Content */}
+          <div className="w-full lg:w-1/2 flex flex-col gap-8 lg:text-left">
+
+            {/* Lead Text */}
+            <motion.p 
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-2xl lg:text-3xl font-medium leading-relaxed text-[#E0E0E0]"
+            >
+              <span className="font-cormorant font-light text-3xl lg:text-4xl tracking-wide leading-relaxed">Building production-ready mobile apps</span> <span className="relative inline-block px-3 ml-1"><span className="absolute inset-0 bg-[#724B39]/30 -skew-x-3 -z-10 rounded-sm" /><span className="font-cormorant font-light text-3xl lg:text-4xl tracking-wide">from ideas</span></span>
+            </motion.p>
+
+            {/* Bio Text */}
+            <motion.div 
+              className="space-y-6 text-lg font-sans text-white/95 leading-8"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              <p>
+                I am a third-year Information Technology student at <strong className="text-[#CF9D7B] font-medium">Muffakham Jah College of Engineering and Technology</strong>, with a strong interest in building <strong className="text-[#CF9D7B] font-medium">reliable and scalable mobile applications</strong> focused on clarity and usability.
               </p>
               
-              <p className="text-lg leading-[1.7] text-[#1A1A1A] font-medium">
-                Beyond academics, I remain actively involved in <span className="font-semibold">hands-on development and technology-focused initiatives</span>, where I enjoy solving practical, real-world problems through well-structured digital solutions.
+              <p>
+                Beyond academics, I remain actively involved in <strong className="text-[#CF9D7B] font-medium">hands-on development and technology-focused initiatives</strong>, where I enjoy solving practical, real-world problems through well-structured digital solutions.
               </p>
 
-              <p className="text-lg leading-[1.7] text-[#1A1A1A] font-medium">
-                I currently serve as <span className="font-bold">Technical Head, IEEE Computational Intelligence Society (MJCET)</span> and as a <span className="font-bold">Cloud Core Member, Google Developer Groups on Campus.</span> In these roles, I lead technical initiatives, conduct workshops, mentor fellow students, and contribute to events that encourage collaborative and applied learning.
-              </p>
-            </div>
+              <div className="pl-6 border-l-2 border-[#724B39] text-[#E0E0E0]">
+                <p>
+                  I currently serve as <strong className="font-medium text-white">Technical Head, IEEE Computational Intelligence Society (MJCET)</strong> and as a <strong className="font-medium text-white">Cloud Core Member, Google Developer Groups on Campus.</strong> In these roles, I lead technical initiatives, conduct workshops, mentor fellow students, and contribute to events that encourage collaborative and applied learning.
+                </p>
+              </div>
+            </motion.div>
 
-            {/* CTAs */}
-            <div className="flex flex-wrap items-center gap-4 pt-4">
-              <Button
-                onClick={scrollToProjects}
-                className="bg-[#5D0D18] hover:bg-[#4A0A12] text-white px-8 py-6 rounded-full text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                <FolderGit2 className="w-5 h-5 mr-2" />
-                View Projects
-              </Button>
+            {/* Stats Grid */}
+            <motion.div 
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              {stats.map((stat, index) => {
+                const Icon = stat.icon;
+                return (
+                  <motion.div
+                    key={index}
+                    whileHover={{ y: -5 }}
+                    className="p-6 rounded-2xl bg-[#162127] border border-[#3A3534]/50 shadow-sm hover:shadow-lg hover:border-[#724B39] transition-all duration-300 group"
+                  >
+                    <div className="flex items-center gap-4 mb-3">
+                      <div className="p-2.5 rounded-lg bg-[#724B39]/20 text-[#CF9D7B] group-hover:bg-[#CF9D7B] group-hover:text-[#0C1519] transition-colors duration-300">
+                        <Icon size={24} />
+                      </div>
+                      <span className="text-3xl font-bold text-[#E0E0E0]">{stat.value}</span>
+                    </div>
+                    <p className="text-sm font-medium text-[#A0A0A0]">{stat.label}</p>
+                  </motion.div>
+                )
+              })}
+            </motion.div>
 
-              <button
-                onClick={scrollToContact}
-                className="px-8 py-6 text-base font-semibold text-[#5D0D18] hover:text-[#4A0A12] transition-colors duration-200 underline-offset-4 hover:underline"
-              >
-                Get in Touch →
-              </button>
-            </div>
-          </motion.div>
+          </div>
         </div>
 
-        {/* Stats Cards - Maroon Accent */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6"
+        {/* Action Buttons - Absolutely Centered Below Layout */}
+        <motion.div 
+          className="w-full flex flex-wrap justify-center gap-6 pt-12 relative z-20"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
         >
-          {stats.map((stat, index) => {
-            const Icon = stat.icon;
-            return (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ 
-                  duration: 0.5, 
-                  delay: 0.7 + index * 0.1
-                }}
-                whileHover={{ y: -8, scale: 1.02 }}
-                className="group relative bg-white rounded-2xl p-6 border-2 border-[#9FB2AC]/30 hover:border-[#5D0D18] shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
-              >
-                {/* Subtle background on hover */}
-                <div className="absolute inset-0 bg-[#5D0D18] opacity-0 group-hover:opacity-5 transition-opacity duration-300" />
-                
-                {/* Icon */}
-                <div className="relative mb-4">
-                  <div className="inline-flex p-3 rounded-xl bg-neutral-100">
-                    <Icon className="w-6 h-6 text-[#9FB2AC]" strokeWidth={2} />
-                  </div>
-                </div>
+          <Button
+            onClick={scrollToProjects}
+            className="group relative overflow-hidden bg-gradient-to-r from-[#CF9D7B] to-[#724B39] text-[#0C1519] px-10 py-7 rounded-full text-base font-bold shadow-[0_4px_20px_-4px_rgba(207,157,123,0.4)] hover:shadow-[0_8px_30px_-4px_rgba(207,157,123,0.5)] transition-all duration-300 hover:scale-[1.02]"
+          >
+            <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+            <span className="relative flex items-center gap-3 font-playfair tracking-wide text-lg">
+              <FolderGit2 className="w-5 h-5" />
+              View Projects
+            </span>
+          </Button>
 
-                {/* Value */}
-                <div className="relative text-4xl lg:text-5xl font-bold text-[#1A1A1A] mb-2 group-hover:scale-110 transition-transform duration-300">
-                  {stat.value}
-                </div>
-
-                {/* Label */}
-                <div className="relative text-sm text-[#555555] leading-tight font-medium">
-                  {stat.label}
-                </div>
-              </motion.div>
-            );
-          })}
+          <Button
+            onClick={scrollToContact}
+            variant="outline"
+            className="group bg-white/10 backdrop-blur-sm border border-[#CF9D7B]/50 hover:bg-[#CF9D7B]/20 text-[#E0E0E0] px-10 py-7 rounded-full text-base font-bold transition-all duration-300 hover:scale-[1.02]"
+          >
+            <span className="relative flex items-center gap-3 font-playfair tracking-wide text-lg">
+              Get in Touch
+              <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
+            </span>
+          </Button>
         </motion.div>
+
       </div>
     </section>
   );
