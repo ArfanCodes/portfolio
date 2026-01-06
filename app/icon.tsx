@@ -20,20 +20,18 @@ export default function Icon() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          background: '#0C1519',
-          borderRadius: '30%',
-          border: '2px solid #CF9D7B',
+          background: 'linear-gradient(135deg, #CF9D7B, #724B39)',
+          borderRadius: '8px',
         }}
       >
         <div
           style={{
-            fontSize: 20,
-            background: '#CF9D7B',
-            backgroundClip: 'text',
-            color: 'transparent',
-            fontWeight: 700,
-            fontFamily: '"Times New Roman", Times, serif',
+            fontSize: 22,
+            color: '#0C1519',
+            fontWeight: 800,
+            fontFamily: 'sans-serif',
             letterSpacing: '-0.05em',
+            marginTop: '-2px', // Optical alignment
           }}
         >
           MA

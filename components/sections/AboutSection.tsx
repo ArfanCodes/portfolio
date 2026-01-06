@@ -138,7 +138,7 @@ export default function AboutSection() {
               {[
                 { Icon: Github, href: "https://github.com/ArfanCodes" },
                 { Icon: Linkedin, href: "https://linkedin.com/in/" },
-                { Icon: XLogo, href: "https://x.com/" }
+                { Icon: XLogo, href: "https://x.com/iamArfaan" }
               ].map((social, index) => (
                 <a
                   key={index}
