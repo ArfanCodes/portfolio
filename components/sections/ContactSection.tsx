@@ -65,7 +65,7 @@ export default function ContactSection() {
                 <span className="text-[#CF9D7B] font-bold tracking-widest uppercase text-sm">Contact</span>
              </div>
              
-             <h2 className="text-5xl lg:text-7xl font-bold text-[#E0E0E0] mb-8 leading-[0.9] tracking-tight">
+             <h2 className="text-4xl lg:text-5xl font-bold text-[#E0E0E0] mb-8 leading-[0.9] tracking-tight">
                Let's start a <br />
                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#CF9D7B] to-[#724B39]">project together</span>
              </h2>

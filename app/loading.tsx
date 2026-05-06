@@ -9,7 +9,7 @@ export default function Loading() {
         </div>
         
         {/* Text */}
-        <p className="text-[#A0A0A0] font-playfair tracking-widest text-sm font-bold uppercase animate-pulse">Loading...</p>
+        <p className="text-[#A0A0A0] font-sora tracking-widest text-sm font-bold uppercase animate-pulse">Loading...</p>
       </div>
     </div>
   );

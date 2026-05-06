@@ -20,7 +20,7 @@ export default function NotFound() {
           transition={{ delay: 0.2, type: "spring", bounce: 0.4 }}
           className="mb-8"
         >
-          <h1 className="text-[150px] md:text-[200px] font-bold font-playfair bg-gradient-to-r from-[#CF9D7B] to-[#724B39] bg-clip-text text-transparent leading-none tracking-tighter">
+          <h1 className="text-[100px] md:text-[150px] font-bold font-sora bg-gradient-to-r from-[#CF9D7B] to-[#724B39] bg-clip-text text-transparent leading-none tracking-tighter">
             404
           </h1>
         </motion.div>
@@ -32,7 +32,7 @@ export default function NotFound() {
           transition={{ delay: 0.4 }}
           className="mb-10"
         >
-          <h2 className="text-3xl md:text-4xl font-bold font-playfair text-[#E0E0E0] mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold font-sora text-[#E0E0E0] mb-4">
             Page Not Found
           </h2>
           <p className="text-lg text-[#A0A0A0] leading-relaxed font-sans max-w-md mx-auto">

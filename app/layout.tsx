@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Playfair_Display, Cormorant_Garamond, Space_Grotesk } from "next/font/google";
+import { Inter, Geist_Mono, Sora, Cormorant_Garamond, Space_Grotesk } from "next/font/google";
 import AnalyticsWrapper from '@/components/AnalyticsWrapper';
 
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const sora = Sora({
+  variable: "--font-sora",
   subsets: ["latin"],
 });
 
@@ -33,14 +33,14 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Mohammed Arfan | App Developer",
+  title: "Mohammed Arfan | Full Stack & Mobile Developer",
   description: "Production-ready mobile apps and full-stack development portfolio.",
   keywords: ["Mohammed Arfan", "App Developer", "Mobile Developer", "React Native", "Full Stack Developer", "Portfolio"],
   authors: [{ name: "Mohammed Arfan" }],
   creator: "Mohammed Arfan",
   metadataBase: new URL("https://arfaan.me"),
   openGraph: {
-    title: "Mohammed Arfan | App Developer",
+    title: "Mohammed Arfan | Full Stack & Mobile Developer",
     description: "Production-ready mobile apps and full-stack development portfolio.",
     url: "https://arfaan.me",
     siteName: "Mohammed Arfan Portfolio",
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Mohammed Arfan - App Developer Portfolio",
+        alt: "Mohammed Arfan - Full Stack & Mobile Developer Portfolio",
       },
     ],
     locale: "en_US",
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mohammed Arfan | App Developer",
+    title: "Mohammed Arfan | Full Stack & Mobile Developer",
     description: "Production-ready mobile apps and full-stack development portfolio.",
     images: ["/og-image.png"],
   },
@@ -95,7 +95,7 @@ export default function RootLayout({
               "@type": "Person",
               name: "Mohammed Arfan",
               url: "https://arfaan.me",
-              jobTitle: "App Developer",
+              jobTitle: "Full Stack & Mobile Developer",
               description: "Production-ready mobile apps and full-stack development",
               sameAs: [
                 "https://www.linkedin.com/in/mohammed-arfan-167452171",
@@ -107,7 +107,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${cormorant.variable} ${spaceGrotesk.variable} antialiased`}
+        className={`${inter.variable} ${geistMono.variable} ${sora.variable} ${cormorant.variable} ${spaceGrotesk.variable} antialiased`}
       >
 
         <AnalyticsWrapper />

@@ -37,7 +37,7 @@ const stats = [
     icon: Award,
   },
   { 
-    value: '5+', 
+    value: '12+', 
     label: 'Technologies mastered',
     icon: FolderGit2,
   },
@@ -88,8 +88,8 @@ export default function AboutSection() {
               transition={{ duration: 0.6 }}
               className="text-center"
             >
-              <h1 className="text-4xl lg:text-6xl font-bold tracking-tight text-[#CF9D7B] mb-2 font-playfair">
-                App Developer
+              <h1 className="text-3xl lg:text-5xl font-bold tracking-tight text-[#CF9D7B] mb-2 font-sora">
+                Full Stack & Mobile Developer
               </h1>
               <div className="h-2 w-20 bg-[#724B39] rounded-full mx-auto mb-6" />
             </motion.div>
@@ -164,7 +164,7 @@ export default function AboutSection() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-2xl lg:text-3xl font-medium leading-relaxed text-[#E0E0E0]"
             >
-              <span className="font-cormorant font-light text-3xl lg:text-4xl tracking-wide leading-relaxed">Building production-ready mobile apps</span> <span className="relative inline-block px-3 ml-1"><span className="absolute inset-0 bg-[#724B39]/30 -skew-x-3 -z-10 rounded-sm" /><span className="font-cormorant font-light text-3xl lg:text-4xl tracking-wide">from ideas</span></span>
+              <span className="font-cormorant font-light text-3xl lg:text-4xl tracking-wide leading-relaxed">Building production-ready full stack & mobile apps</span> <span className="relative inline-block px-3 ml-1"><span className="absolute inset-0 bg-[#724B39]/30 -skew-x-3 -z-10 rounded-sm" /><span className="font-cormorant font-light text-3xl lg:text-4xl tracking-wide">from ideas</span></span>
             </motion.p>
 
             {/* Bio Text */}
@@ -176,7 +176,7 @@ export default function AboutSection() {
               transition={{ duration: 0.6, delay: 0.3 }}
             >
               <p>
-                I am a third-year Information Technology student at <strong className="text-[#CF9D7B] font-medium">Muffakham Jah College of Engineering and Technology</strong>, with a strong interest in building <strong className="text-[#CF9D7B] font-medium">reliable and scalable mobile applications</strong> focused on clarity and usability.
+                I am a third-year Information Technology student at <strong className="text-[#CF9D7B] font-medium">Muffakham Jah College of Engineering and Technology</strong>, with a strong interest in building <strong className="text-[#CF9D7B] font-medium">reliable and scalable full stack web and mobile applications</strong> focused on clarity and usability.
               </p>
               
               <p>
@@ -234,7 +234,7 @@ export default function AboutSection() {
             className="group relative overflow-hidden bg-gradient-to-r from-[#CF9D7B] to-[#724B39] text-[#0C1519] px-10 py-7 rounded-full text-base font-bold shadow-[0_4px_20px_-4px_rgba(207,157,123,0.4)] hover:shadow-[0_8px_30px_-4px_rgba(207,157,123,0.5)] transition-all duration-300 hover:scale-[1.02]"
           >
             <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-            <span className="relative flex items-center gap-3 font-playfair tracking-wide text-lg">
+            <span className="relative flex items-center gap-3 font-sora tracking-wide text-lg">
               <FolderGit2 className="w-5 h-5" />
               View Projects
             </span>
@@ -245,7 +245,7 @@ export default function AboutSection() {
             variant="outline"
             className="group bg-white/10 backdrop-blur-sm border border-[#CF9D7B]/50 hover:bg-[#CF9D7B]/20 text-[#E0E0E0] px-10 py-7 rounded-full text-base font-bold transition-all duration-300 hover:scale-[1.02]"
           >
-            <span className="relative flex items-center gap-3 font-playfair tracking-wide text-lg">
+            <span className="relative flex items-center gap-3 font-sora tracking-wide text-lg">
               Get in Touch
               <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
             </span>

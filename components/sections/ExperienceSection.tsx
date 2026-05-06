@@ -72,7 +72,7 @@ export default function ExperienceSection() {
                <span className="w-12 h-1 bg-[#CF9D7B] rounded-full" />
                <span className="text-[#CF9D7B] font-bold tracking-widest uppercase text-sm">Professional Journey</span>
              </div>
-             <h2 className="text-5xl lg:text-7xl font-bold text-[#E0E0E0] mb-6">
+             <h2 className="text-4xl lg:text-5xl font-bold text-[#E0E0E0] mb-6">
                Experience <span className="text-[#CF9D7B]">& Impact</span>
              </h2>
              <p className="text-lg text-gray-300 leading-relaxed max-w-xl">
@@ -109,7 +109,7 @@ export default function ExperienceSection() {
         <div className="relative mt-24">
           
           {/* Central Line */}
-          <div className="absolute left-[20px] lg:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#CF9D7B] via-[#CF9D7B]/20 to-transparent lg:-translate-x-1/2" />
+          <div className="absolute left-[20px] lg:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#CF9D7B] via-[#CF9D7B]/20 to-transparent -translate-x-1/2" />
 
           <div className="space-y-24 lg:space-y-32">
             {experiences.map((exp, index) => (
@@ -131,7 +131,7 @@ function TimelineItem({ data, index }: { data: any, index: number }) {
     <div className={`relative flex flex-col lg:flex-row gap-8 lg:gap-0 ${isLeft ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-start w-full group`}>
       
       {/* Date Marker (Center) */}
-      <div className="absolute left-[20px] lg:left-1/2 top-0 lg:-translate-x-1/2 flex flex-col items-center">
+      <div className="absolute left-[20px] lg:left-1/2 top-0 -translate-x-1/2 flex flex-col items-center">
         <motion.div 
           initial={{ scale: 0 }}
           whileInView={{ scale: 1 }}

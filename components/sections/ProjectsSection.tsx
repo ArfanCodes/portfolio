@@ -1,76 +1,62 @@
 'use client';
 
 import { motion, useScroll, useTransform, MotionValue } from 'framer-motion';
-import { Github, Award, ArrowUpRight, Trophy } from 'lucide-react';
+import { Github, Award, ArrowUpRight, Trophy, Globe } from 'lucide-react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { useRef } from 'react';
 
 const projects = [
   {
+    title: 'FindMe',
+    event: 'Google Solution Challenge',
+    outcome: 'Full stack disaster response platform connecting citizens, NGOs, and rescue operators.',
+    role: 'Full Stack Developer',
+    whatIBuilt: [
+      'Real-time Firestore data model across 12+ collections with security rules',
+      'FastAPI ML service for composite profile and face matching across missing and found records',
+      'Leaflet command map and multilingual UI (English, Hindi, Telugu)'
+    ],
+    impact: 'Live rescue coordination and safe check-ins',
+    techStack: ['React 19', 'Firebase', 'FastAPI', 'Python', 'Leaflet', 'i18next'],
+    liveLink: 'https://findme-e570e.web.app',
+    isFlagship: true,
+    image: '/images/project-findme-v2.png',
+    color: '#162127',
+  },
+  {
+    title: 'FINO',
+    outcome: 'Personal finance management app with real-time cloud sync and offline-first data persistence.',
+    role: 'Full Stack & Mobile Developer',
+    whatIBuilt: [
+      'Offline-first data persistence reducing perceived latency by ~60%',
+      'Category-based budgeting engine and expense tracking module',
+      'App-wide state management using Zustand, keeping UI response times under 100ms'
+    ],
+    impact: 'Scalable data modeling supporting unlimited transaction history',
+    techStack: ['React Native', 'Firebase', 'Zustand'],
+    github: 'https://github.com/ArfanCodes/fino-your-financial-budget-app',
+    isFlagship: true,
+    image: '/images/project-fino-v3.png',
+    color: '#162127',
+  },
+  {
     title: 'Peso',
     event: 'Datanyx',
-    outcome: 'AI-powered fintech app delivering real-time financial insights and stability scoring.',
-    role: 'App Developer',
-    award: '2nd Place – Datathon',
-    awardOrg: 'AWS Cloud Club MJCET & IEEE SMC',
+    outcome: 'AI-powered fintech app evaluating user spending patterns and generating AI-backed risk scores and budget predictions.',
+    role: 'Full Stack & Mobile Developer',
+    award: '2nd Place',
+    awardOrg: 'AWS Cloud Club',
     whatIBuilt: [
-      'AI risk engine integration with predictive analytics',
-      'Real-time financial dashboards with smart spending insights',
+      'Backend risk-scoring engine integration with a React Native frontend',
+      'React Query caching optimizing Supabase queries, reducing redundant network calls by 40%',
+      'Real-time data synchronization with conflict resolution using Supabase RLS'
     ],
-    impact: 'Gamified achievement system',
-    techStack: ['React Native', 'TypeScript', 'Zustand', 'Supabase', 'ML Integration'],
+    impact: 'Awarded 2nd place for system design depth and working product quality',
+    techStack: ['React Native', 'Supabase', 'TypeScript', 'Zustand', 'React Query'],
     github: 'https://github.com/ArfanCodes/Peso',
     isFlagship: true,
     image: '/images/project-peso.png',
-    color: '#162127', // Dark Jungle Green
-  },
-  {
-    title: 'SwiftBytes',
-    event: 'Envisage',
-    outcome: 'Smart canteen management platform with high-performance ordering and inventory workflows.',
-    role: 'Team Lead & App Developer',
-    award: '2nd Place – Exhibition',
-    awardOrg: 'Envisage, MJCET',
-    whatIBuilt: [
-      'Real-time menu and order management system',
-      'AWS deployment architecture for institutional scale',
-    ],
-    impact: 'Recognized for technical excellence and leadership',
-    techStack: ['Node.js', 'Express', 'React', 'AWS', 'HTML/CSS'],
-    github: 'https://github.com/ArfanCodes/SwiftBytes',
-    isFlagship: true,
-    image: '/images/project-swiftbytes.png',
-    color: '#162127',
-  },
-  {
-    title: 'CropLytics',
-    outcome: 'AI-driven farming assistant with real-time weather, soil analysis, and crop recommendations.',
-    role: 'Team Lead & App Developer',
-    whatIBuilt: [
-      'Multilingual onboarding with Appwrite authentication',
-      'Performance-optimized components using React.memo',
-    ],
-    impact: 'Empowering farmers with data-driven decision making',
-    techStack: ['React Native', 'FastAPI', 'TypeScript', 'Appwrite', 'AsyncStorage'],
-    github: 'https://github.com/ArfanCodes/CropLytics',
-    isFlagship: false,
-    image: '/images/project-croplytics.png',
-    color: '#162127',
-  },
-  {
-    title: 'Habit Tracker App',
-    outcome: 'Cross-platform habit tracking with streak visualization and progress analytics.',
-    role: 'Developer',
-    whatIBuilt: [
-      'Interactive streak visualizer component',
-      'Real-time sync with Appwrite backend',
-    ],
-    impact: 'Secure authentication with production Android APK',
-    techStack: ['React Native', 'TypeScript', 'Appwrite', 'TailwindCSS'],
-    github: 'https://github.com/ArfanCodes/Habit-Tracker-App',
-    isFlagship: false,
-    image: '/images/project-habit.png',
     color: '#162127',
   },
 ];
@@ -104,7 +90,7 @@ export default function ProjectsSection() {
           <span className="inline-block py-1 px-3 rounded-full bg-[#162127] border border-[#3A3534] text-[#CF9D7B] text-sm font-semibold tracking-wide mb-4">
             FEATURED WORK
           </span>
-          <h2 className="text-5xl lg:text-7xl font-bold text-[#CF9D7B] mb-6 tracking-tight">
+          <h2 className="text-4xl lg:text-5xl font-bold text-[#CF9D7B] mb-6 tracking-tight">
             Selected Projects
           </h2>
           <p className="text-lg font-medium text-[#A0A0A0] max-w-2xl mx-auto leading-relaxed">
@@ -147,7 +133,8 @@ interface CardProps {
   whatIBuilt: string[];
   impact: string;
   techStack: string[];
-  github: string;
+  github?: string;
+  liveLink?: string;
   isFlagship: boolean;
   image: string;
   color: string;
@@ -156,7 +143,7 @@ interface CardProps {
   targetScale: number;
 }
 
-const Card = ({ i, title, event, outcome, role, award, awardOrg, whatIBuilt, impact, techStack, github, isFlagship, image, color, progress, range, targetScale }: CardProps) => {
+const Card = ({ i, title, event, outcome, role, award, awardOrg, whatIBuilt, impact, techStack, github, liveLink, isFlagship, image, color, progress, range, targetScale }: CardProps) => {
   const container = useRef(null);
   const { scrollYProgress } = useScroll({
     target: container,
@@ -169,7 +156,7 @@ const Card = ({ i, title, event, outcome, role, award, awardOrg, whatIBuilt, imp
   return (
     <div ref={container} className="w-full flex items-center justify-center lg:h-screen lg:sticky lg:top-0 py-10 lg:py-0">
       <motion.div 
-        className="relative flex flex-col lg:flex-row gap-8 lg:gap-12 bg-[#162127] rounded-3xl p-6 lg:p-12 shadow-2xl border border-[#3A3534] w-full max-w-6xl origin-top"
+        className={`relative flex flex-col lg:flex-row gap-8 lg:gap-12 bg-[#162127] rounded-3xl p-6 lg:p-12 shadow-2xl border border-[#3A3534] w-full max-w-6xl origin-top ${title === 'FINO' ? 'items-center' : 'items-stretch'}`}
         style={{ 
           backgroundColor: color, 
           scale: typeof window !== 'undefined' && window.innerWidth >= 1024 ? scale : 1,
@@ -184,7 +171,7 @@ const Card = ({ i, title, event, outcome, role, award, awardOrg, whatIBuilt, imp
         <div className="flex flex-col justify-between w-full lg:w-1/2 gap-6 lg:gap-8">
           <div>
             <div className="flex flex-col gap-1 mb-4">
-              <h3 className="text-2xl lg:text-4xl font-bold font-playfair tracking-tight text-[#E0E0E0]">{title}</h3>
+              <h3 className="text-2xl lg:text-3xl font-bold font-sora tracking-tight text-[#E0E0E0]">{title}</h3>
               {event && (
                 <span className="text-[#CF9D7B] font-bold text-sm uppercase tracking-widest opacity-80">
                   {event}
@@ -240,21 +227,37 @@ const Card = ({ i, title, event, outcome, role, award, awardOrg, whatIBuilt, imp
               ))}
             </div>
 
-            <Button 
-              className="w-full sm:w-auto bg-[#724B39] hover:bg-[#5C3A2A] text-[#E0E0E0] rounded-full px-8 py-6 text-base font-bold shadow-xl transition-transform hover:-translate-y-1"
-              asChild
-            >
-              <a href={github} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
-                <Github size={20} />
-                <span>Source</span>
-                <ArrowUpRight size={18} />
-              </a>
-            </Button>
+            <div className="flex flex-wrap sm:flex-nowrap gap-3 w-full sm:w-auto">
+              {github && (
+                <Button 
+                  className="w-full sm:w-auto bg-[#724B39] hover:bg-[#5C3A2A] text-[#E0E0E0] rounded-full px-8 py-6 text-base font-bold shadow-xl transition-transform hover:-translate-y-1"
+                  asChild
+                >
+                  <a href={github} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
+                    <Github size={20} />
+                    <span>Source</span>
+                    <ArrowUpRight size={18} />
+                  </a>
+                </Button>
+              )}
+              {liveLink && (
+                <Button 
+                  className="w-full sm:w-auto bg-[#CF9D7B] hover:bg-[#B38363] text-[#0C1519] rounded-full px-8 py-6 text-base font-bold shadow-xl transition-transform hover:-translate-y-1"
+                  asChild
+                >
+                  <a href={liveLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
+                    <Globe size={20} />
+                    <span>Live Preview</span>
+                    <ArrowUpRight size={18} />
+                  </a>
+                </Button>
+              )}
+            </div>
           </div>
         </div>
 
         {/* Right: Image */}
-        <div className="relative w-full lg:w-1/2 aspect-video lg:aspect-auto lg:h-auto rounded-2xl overflow-hidden shadow-xl border border-[#3A3534] bg-[#0C1519] group min-h-[200px]">
+        <div className={`relative w-full lg:w-1/2 rounded-2xl overflow-hidden shadow-xl border border-[#3A3534] bg-[#0C1519] group ${title === 'FINO' ? 'aspect-video' : 'aspect-video lg:aspect-auto lg:h-auto min-h-[200px]'}`}>
           <Image
             src={image}
             alt={title}

@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og';
 
 export const runtime = 'edge';
-export const alt = 'Mohammed Arfan - App Developer Portfolio';
+export const alt = 'Mohammed Arfan - Full Stack & Mobile Developer Portfolio';
 export const size = {
   width: 1200,
   height: 630,
@@ -57,7 +57,7 @@ export default async function Image() {
               marginBottom: 30,
             }}
           >
-            App Developer
+            Full Stack & Mobile Developer
           </div>
 
           {/* Description */}

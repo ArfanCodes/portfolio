@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { FileText, Smartphone, Code, Server, Database, Wrench, CheckCircle, Zap } from 'lucide-react';
+import { FileText, Smartphone, Code, Server, Database, CheckCircle, Zap, Layout, Cloud } from 'lucide-react';
 import { 
   SiReact, 
   SiTypescript, 
@@ -14,73 +14,95 @@ import {
   SiAmazon, 
   SiGit, 
   SiGithub,
-  SiPrisma,
-  SiFastapi,
-  SiSqlite
+  SiSqlite,
+  SiPython,
+  SiCplusplus,
+  SiHtml5,
+  SiNextdotjs,
+  SiVite,
+  SiFramer,
+  SiMongodb,
+  SiFirebase
 } from 'react-icons/si';
 
 const skillCategories = [
   {
-    title: 'Mobile Development',
-    icon: Smartphone,
-    primarySkills: [
-      { name: 'React Native', icon: SiReact, color: '#61DAFB' },
-      { name: 'TypeScript', icon: SiTypescript, color: '#3178C6' },
-    ],
-    secondarySkills: [
-      { name: 'Expo', icon: SiReact, color: '#ffffff' },
-      { name: 'Appwrite', icon: FileText, color: '#F02E65' },
-      { name: 'AsyncStorage', icon: FileText, color: '#61DAFB' },
-      { name: 'Zustand', icon: SiReact, color: '#ffffff' },
-    ],
-  },
-  {
-    title: 'Frontend Development',
+    title: 'Languages',
     icon: Code,
     primarySkills: [
-      { name: 'React', icon: SiReact, color: '#61DAFB' },
+      { name: 'JavaScript (ES6+)', icon: SiJavascript, color: '#F7DF1E' },
       { name: 'TypeScript', icon: SiTypescript, color: '#3178C6' },
     ],
     secondarySkills: [
-      { name: 'JavaScript', icon: SiJavascript, color: '#F7DF1E' },
-      { name: 'Tailwind CSS', icon: SiTailwindcss, color: '#06B6D4' },
+      { name: 'Java', icon: FileText, color: '#ffffff' },
+      { name: 'Python', icon: SiPython, color: '#3776AB' },
+      { name: 'C++', icon: SiCplusplus, color: '#00599C' },
     ],
   },
   {
-    title: 'Backend Development',
+    title: 'Frontend',
+    icon: Layout,
+    primarySkills: [
+      { name: 'React', icon: SiReact, color: '#61DAFB' },
+      { name: 'Next.js', icon: SiNextdotjs, color: '#ffffff' },
+    ],
+    secondarySkills: [
+      { name: 'HTML & CSS', icon: SiHtml5, color: '#E34F26' },
+      { name: 'Vite', icon: SiVite, color: '#646CFF' },
+      { name: 'Tailwind CSS', icon: SiTailwindcss, color: '#06B6D4' },
+      { name: 'Framer Motion', icon: SiFramer, color: '#0055FF' },
+    ],
+  },
+  {
+    title: 'Backend',
     icon: Server,
     primarySkills: [
       { name: 'Node.js', icon: SiNodedotjs, color: '#339933' },
       { name: 'Express.js', icon: SiExpress, color: '#ffffff' },
     ],
     secondarySkills: [
-      { name: 'FastAPI', icon: SiFastapi, color: '#009688' },
       { name: 'REST APIs', icon: FileText, color: '#FF6C37' },
+      { name: 'JWT Auth', icon: FileText, color: '#ffffff' },
     ],
   },
   {
-    title: 'Database & Cloud',
+    title: 'Mobile / App',
+    icon: Smartphone,
+    primarySkills: [
+      { name: 'React Native', icon: SiReact, color: '#61DAFB' },
+      { name: 'Zustand', icon: FileText, color: '#ffffff' },
+    ],
+    secondarySkills: [
+      { name: 'Expo', icon: FileText, color: '#ffffff' },
+      { name: 'React Navigation', icon: FileText, color: '#ffffff' },
+      { name: 'React Query', icon: SiReact, color: '#FF4154' },
+      { name: 'AsyncStorage', icon: FileText, color: '#61DAFB' },
+    ],
+  },
+  {
+    title: 'Databases',
     icon: Database,
     primarySkills: [
       { name: 'PostgreSQL', icon: SiPostgresql, color: '#4169E1' },
-      { name: 'Supabase', icon: SiSupabase, color: '#3ECF8E' },
+      { name: 'MongoDB', icon: SiMongodb, color: '#47A248' },
     ],
     secondarySkills: [
       { name: 'SQLite', icon: SiSqlite, color: '#003B57' },
-      { name: 'AWS', icon: SiAmazon, color: '#FF9900' },
-      { name: 'Prisma', icon: SiPrisma, color: '#ffffff' },
+      { name: 'Firestore', icon: SiFirebase, color: '#FFCA28' },
+      { name: 'Supabase', icon: SiSupabase, color: '#3ECF8E' },
     ],
   },
   {
-    title: 'Tools & Technologies',
-    icon: Wrench,
+    title: 'Cloud / DevOps',
+    icon: Cloud,
     primarySkills: [
-      { name: 'Git', icon: SiGit, color: '#F05032' },
+      { name: 'AWS', icon: SiAmazon, color: '#FF9900' },
       { name: 'GitHub', icon: SiGithub, color: '#ffffff' },
     ],
     secondarySkills: [
-      { name: 'React Query', icon: SiReact, color: '#FF4154' },
-      { name: 'Axios', icon: FileText, color: '#5A29E4' },
+      { name: 'Firebase', icon: SiFirebase, color: '#FFCA28' },
+      { name: 'Supabase', icon: SiSupabase, color: '#3ECF8E' },
+      { name: 'Git', icon: SiGit, color: '#F05032' },
     ],
   },
 ];
@@ -127,7 +149,7 @@ export default function SkillsSection() {
             </span>
           </motion.div>
           
-          <h2 className="text-5xl lg:text-7xl font-bold text-[#E0E0E0] mb-6 tracking-tight">
+          <h2 className="text-4xl lg:text-5xl font-bold text-[#E0E0E0] mb-6 tracking-tight">
             Skills & <span className="text-[#CF9D7B]">Technologies</span>
           </h2>
           

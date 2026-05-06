@@ -10,7 +10,7 @@ const achievements = [
     project: 'DataNyx (FinTech Track)',
     organization: 'AWS Cloud Club MJCET & IEEE SMC',
     date: 'November 2025',
-    role: 'App Developer',
+    role: 'Full Stack & Mobile Developer',
     description: 'Built an AI-powered financial stability app with predictive insights and real-time budget tracking.',
     techStack: ['React Native', 'Supabase', 'ML Integration'],
     icon: Trophy,
@@ -22,7 +22,7 @@ const achievements = [
     project: 'SwiftBytes (Project Exhibition)',
     organization: 'Envisage, MJCET',
     date: 'July 2025',
-    role: 'Lead Developer',
+    role: 'Lead Full Stack & Mobile Developer',
     description: 'Led development of a smart canteen management platform with high performance and seamless UX.',
     techStack: ['AWS Deployment', 'Performance Optimization'],
     icon: Medal,
@@ -56,7 +56,7 @@ export default function AchievementsSection() {
            <span className="inline-block py-1 px-3 rounded-full bg-[#162127] border border-[#3A3534] text-[#CF9D7B] text-sm font-semibold tracking-wide mb-4">
              HALL OF FAME
            </span>
-           <h2 className="text-5xl lg:text-7xl font-bold text-[#E0E0E0] mb-6 tracking-tight">
+           <h2 className="text-4xl lg:text-5xl font-bold text-[#E0E0E0] mb-6 tracking-tight">
              Recognition & <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#CF9D7B] to-[#E6B99D]">Awards</span>
            </h2>
            <p className="text-lg font-medium text-[#A0A0A0] max-w-2xl mx-auto leading-relaxed">
