@@ -2,43 +2,108 @@
 
 > **⚠️ IMPORTANT NOTICE:** This is a personal portfolio website for **viewing purposes only**. This repository and its code are **NOT available for cloning, copying, or use as a template**. All rights reserved.
 
-A modern, responsive portfolio website showcasing projects, experience, achievements, and professional background. Built with Next.js 16, React 19, and Tailwind CSS 4, featuring smooth animations and an intuitive user experience.
+A premium, editorial portfolio website built around a warm light-theme design language — soft cream surfaces, refined typography, and product-quality polish across every section, state, and supporting screen. Built with Next.js 16, React 19, and Tailwind CSS 4.
+
+## 🎨 Design Language
+
+A cohesive light-theme system applied across the entire experience:
+
+- **Warm cream surface** (`#FAF8F5`) with subtle peach radial blooms and 3% dot grain
+- **Deep warm slate** (`#1A1614`) for primary CTAs and the brand mark surface
+- **Warm gold accents** (`#C77F45` / `#E8B97E`) for highlights and interactive accents
+- **Sora** for headlines, **Cormorant Garamond** for editorial italics, **Inter** for body
+- Consistent motion language across sections (`[0.22, 1, 0.36, 1]` easing, 0.6–0.7s duration)
+- Unified card grammar: white surfaces, warm cream borders, layered shadows that deepen on hover
 
 ## 🚀 Tech Stack
 
 ### Core Framework
-- **Next.js 16.1.1** - React framework with App Router
-- **React 19.2.1** - UI library
-- **TypeScript 5** - Type-safe development
+- **Next.js 16.1.1** – App Router, React Server Components, image optimization
+- **React 19.2.1**
+- **TypeScript 5**
 
 ### Styling & Animation
-- **Tailwind CSS 4** - Utility-first CSS framework
-- **Framer Motion 12** - Production-ready animation library
-- **GSAP 3.14** - Professional-grade animation platform
-- **Lucide React** - Modern icon library
+- **Tailwind CSS 4** with `@theme inline` tokens
+- **Framer Motion 12** for reveal-on-scroll, layout transitions, and microinteractions
+- **GSAP 3.14**
+- **Lucide React** + **react-icons** for iconography
+- **tw-animate-css** for utility animations
+
+### State & Utilities
+- **Zustand 5** for lightweight state
+- **Class Variance Authority**, **clsx**, **tailwind-merge** for class composition
+- **Radix Slot** for composable primitives
 
 ### 3D Graphics
-- **React Three Fiber 9.4** - React renderer for Three.js
-- **React Three Drei 10.7** - Useful helpers for R3F
-
-### State Management & Utilities
-- **Zustand 5.0** - Lightweight state management
-- **Class Variance Authority** - Component variant management
-- **clsx & tailwind-merge** - Conditional class management
+- **React Three Fiber 9.4** + **React Three Drei 10.7**
 
 ### Analytics & Integrations
-- **Google Analytics 4** - Visitor tracking and analytics
-- **FormSubmit** - Contact form email delivery
-- **nextjs-google-analytics** - GA4 integration for Next.js
+- **nextjs-google-analytics** (GA4)
+- **FormSubmit** for contact form delivery
 
 ## 📋 Prerequisites
 
 - **Node.js** 20.x or higher
 - **npm** 10.x or higher
 
+## ✨ Sections
+
+- **Hero / About** – Editorial 5/7 split with a layered portrait frame, "Open to Internships" status pill, headline, and inline stat grid
+- **Selected Projects** – Asymmetric case-study layout, dominant 16:10 screenshots with floating warm glows, FLAGSHIP and award badges, refined tech pills
+- **Experience & Impact** – Floating editorial cards with ambient warm bloom on hover, compact meta column, hairline-separated key outcomes
+- **Recognition & Awards** – Hero composition with a gold gradient medallion embossing the rank, editorial index numbering, decorative concentric arcs
+- **Skills & Technologies** – 1/2/3-col grid with categorized "Core Stack" + "Additional Toolkit", warm chips, cream-to-dark hover transitions on icon tiles
+- **Contact** – 5/7 grid with social cards on the left and a refined form on the right; rounded cream inputs morph to white on focus with a 4px terracotta ring
+- **Footer** – Minimal three-column closure with the `</>` brand lockup, copyright, and a back-to-top link
+
+## 🧩 System States & Supporting Screens
+
+All in the same warm light language:
+
+- **`app/loading.tsx`** – `</> ArfanCodes` brand lockup with a dual-ring loader
+- **`app/not-found.tsx`** – 404 with the middle `0` accented in terracotta and a peach glow
+- **`app/error.tsx`** – Route-level error boundary with a gold medallion and recovery actions
+- **`app/global-error.tsx`** – Root crash fallback rendered inline (no layout dependency)
+- **`components/ui/ImageFrame.tsx`** – `next/image` wrapper with a shimmer skeleton on load and an editorial fallback card on failure (wired into hero + project screenshots)
+- **Contact success modal** – Light recomposition with gold-gradient medallion
+
+## 🎯 Brand & Iconography
+
+- **`</> ArfanCodes`** wordmark used consistently in the navbar, footer, loading state, and social preview
+- Favicon family (`32`, `180`, `192`, `512`) drawn as a single geometric `</>` glyph on `#1A1614` with warm gold strokes for legibility at every size
+- OG social preview redesigned around the same brand grammar (cream surface, brand lockup, status pill, headline + subtitle)
+- PWA manifest theme: `background_color: #FAF8F5`, `theme_color: #1A1614`
+
+## 🖥️ UI/UX Highlights
+
+- Floating glass navbar with refined underline active state (spring-animated `layoutId`)
+- Subtle reveal-on-scroll across every section with unified easing and duration
+- Card hovers: warm border darkening + shadow deepening + 1–4px lift
+- Form fields: cream rest state, white focus state, 4px terracotta focus halo
+- Mobile menu: cream overlay with peach blooms and editorial nav reveals
+- Reduced-motion respected globally via `prefers-reduced-motion`
+- Premium shimmer skeleton + graceful image fallback on every visual surface
+
+## ⚡ Performance
+
+- Next.js App Router with automatic code splitting
+- `next/image` for all imagery, with shimmer skeletons hiding loading flicker
+- Per-section reveal animations gated by `viewport={{ once: true }}` to avoid re-triggers
+- TypeScript end-to-end for type safety
+
+## 🌐 Browser Support
+
+- Chrome, Firefox, Safari, Edge (latest)
+- iOS Safari, Chrome Mobile
+
+## 🌍 Live Portfolio
+
+**[https://arfaan.me](https://arfaan.me)**
+
 ## ⚠️ Usage Restrictions
 
 **This portfolio is NOT open source and is NOT available for:**
+
 - Cloning or forking
 - Using as a template or boilerplate
 - Copying code or design elements
@@ -48,51 +113,11 @@ This repository is shared publicly for **demonstration and viewing purposes only
 
 If you're interested in working together or have questions about my work, please use the contact form on the live website.
 
-##  Features
-
-### Sections
-- **About** - Professional introduction with statistics and profile
-- **Projects** - Portfolio of completed projects with details
-- **Experience** - Professional work history and timeline
-- **Achievements** - Notable accomplishments and recognitions
-- **Resume** - Downloadable resume with viewer modal
-- **Contact** - Contact form with FormSubmit integration
-
-### UI/UX Features
-- Responsive design for all screen sizes
-- Smooth scroll animations with Framer Motion
-- Intersection Observer-based section reveals
-- Mobile-optimized hamburger navigation
-- Form validation and submission handling
-- Animated success modal with confetti effects
-- Modal dialogs for resume viewing and downloading
-- Professional typography and spacing
-- Google Analytics visitor tracking
-
-### Performance Optimizations
-- Next.js App Router for optimal performance
-- Automatic code splitting
-- Image optimization
-- CSS-in-JS with Tailwind CSS
-- TypeScript for type safety
-
-##  Browser Support
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-- Mobile browsers (iOS Safari, Chrome Mobile)
-
-## 🌐 Live Portfolio
-
-Visit the live portfolio at: **[https://arfaan.me]**
-
 ---
 
 ## 📄 License & Copyright
 
-**© 2025 Mohammed Arfan. All Rights Reserved.**
+**© 2026 Mohammed Arfan. All Rights Reserved.**
 
 This project and its contents are proprietary and confidential. Unauthorized copying, distribution, modification, or use of this code, via any medium, is strictly prohibited without explicit written permission from the author.
 
@@ -102,8 +127,9 @@ This project and its contents are proprietary and confidential. Unauthorized cop
 
 **Mohammed Arfan**
 
-- Portfolio: [https://arfaan.me]
+- Portfolio: [https://arfaan.me](https://arfaan.me)
 - LinkedIn: [mohammed-arfan-167452171](https://www.linkedin.com/in/mohammed-arfan-167452171)
+- GitHub: [@ArfanCodes](https://github.com/ArfanCodes)
 
 ## 🙏 Acknowledgments
 
@@ -113,4 +139,4 @@ This project and its contents are proprietary and confidential. Unauthorized cop
 
 ---
 
-**Last Updated:** December 2025
+**Last Updated:** May 2026
