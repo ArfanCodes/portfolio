@@ -1,9 +1,27 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Briefcase, Calendar, Target, Users, TrendingUp, Cloud, Brain, Award, Sparkles, Zap } from 'lucide-react';
+import { Calendar, Target, Users, TrendingUp, Cloud, Award, Sparkles, MapPin } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 
-const experiences = [
+interface KeyOutcome {
+  icon: LucideIcon;
+  text: string;
+}
+
+interface Experience {
+  title: string;
+  company: string;
+  location: string;
+  period: string;
+  isLeadership: boolean;
+  isOngoing: boolean;
+  tags: string[];
+  impactSummary: string;
+  keyOutcomes: KeyOutcome[];
+}
+
+const experiences: Experience[] = [
   {
     title: 'Technical Head',
     company: 'IEEE Computational Intelligence Society, MJCET',
@@ -43,80 +61,86 @@ const impactStats = [
 
 export default function ExperienceSection() {
   return (
-    <section id="experience" className="py-24 lg:py-32 relative bg-[#0C1519] overflow-hidden text-[#E0E0E0]">
-      
-      {/* Background Decor: Abstract Circuit/Node Pattern */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
-         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#CF9D7B] rounded-full blur-[150px] mix-blend-overlay" />
-         <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-[#724B39] rounded-full blur-[150px] mix-blend-overlay" />
-         <svg className="absolute inset-0 w-full h-full opacity-10" xmlns="http://www.w3.org/2000/svg">
-            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#CF9D7B" strokeWidth="0.5" />
-            </pattern>
-            <rect width="100%" height="100%" fill="url(#grid)" />
-         </svg>
+    <section
+      id="experience"
+      className="relative py-20 lg:py-28 bg-[#FAF8F5] text-[#1A1614] overflow-hidden"
+    >
+      {/* Soft warm ambient background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-[5%] left-[-10%] w-[560px] h-[560px] rounded-full bg-[#F2E5D2] blur-[150px] opacity-55" />
+        <div className="absolute bottom-[10%] right-[-10%] w-[560px] h-[560px] rounded-full bg-[#EFE4D4] blur-[150px] opacity-50" />
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage:
+              'radial-gradient(circle at 1px 1px, #1A1614 1px, transparent 0)',
+            backgroundSize: '28px 28px',
+          }}
+        />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-        
-        {/* Header Area */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12 mb-20">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="max-w-2xl"
-          >
-             <div className="flex items-center gap-3 mb-4">
-               <span className="w-12 h-1 bg-[#CF9D7B] rounded-full" />
-               <span className="text-[#CF9D7B] font-bold tracking-widest uppercase text-sm">Professional Journey</span>
-             </div>
-             <h2 className="text-4xl lg:text-5xl font-bold text-[#E0E0E0] mb-6">
-               Experience <span className="text-[#CF9D7B]">& Impact</span>
-             </h2>
-             <p className="text-lg text-gray-300 leading-relaxed max-w-xl">
-               Leadership, technical mentorship, and community-driven impact across multiple student developer groups.
-             </p>
-          </motion.div>
+      <div className="container mx-auto px-6 lg:px-10 relative z-10">
 
-          {/* Stats Bar (Refactored from Sidebar) */}
-          <motion.div 
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex flex-wrap gap-6 lg:gap-8"
-          >
-            {impactStats.map((stat, i) => {
-              const Icon = stat.icon;
-              return (
-                <div key={i} className="flex items-center gap-4 bg-[#162127]/50 border border-[#CF9D7B]/20 px-6 py-4 rounded-2xl backdrop-blur-sm hover:bg-[#162127] transition-colors">
-                  <div className="p-3 bg-gradient-to-br from-[#724B39] to-[#5C3A2A] rounded-xl text-[#E0E0E0] shadow-lg shadow-[#724B39]/20">
-                    <Icon size={24} />
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-[#E0E0E0] leading-none mb-1">{stat.value}</div>
-                    <div className="text-xs font-medium text-[#CF9D7B]/80 uppercase tracking-wide">{stat.label}</div>
-                  </div>
-                </div>
-              )
-            })}
-          </motion.div>
-        </div>
-
-        {/* Timeline Layout */}
-        <div className="relative mt-24">
-          
-          {/* Central Line */}
-          <div className="absolute left-[20px] lg:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#CF9D7B] via-[#CF9D7B]/20 to-transparent -translate-x-1/2" />
-
-          <div className="space-y-24 lg:space-y-32">
-            {experiences.map((exp, index) => (
-              <TimelineItem key={index} data={exp} index={index} />
-            ))}
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="max-w-3xl mb-12 lg:mb-16"
+        >
+          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/80 backdrop-blur-md border border-[#E8E2D9] shadow-[0_2px_10px_-4px_rgba(60,40,20,0.08)] mb-6">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#C77F45]" />
+            <span className="text-[11px] font-semibold tracking-[0.18em] uppercase text-[#5A5550] font-sora">
+              Professional Journey
+            </span>
           </div>
 
+          <h2 className="font-sora font-semibold tracking-[-0.025em] leading-[1.02] text-[#1A1614] text-4xl sm:text-5xl lg:text-[3.5rem]">
+            Experience <span className="text-[#C77F45]">&amp; Impact</span>
+          </h2>
+
+          <p className="mt-5 text-lg text-[#5A5550] max-w-2xl leading-relaxed">
+            Leadership, technical mentorship, and community-driven impact across multiple student developer groups.
+          </p>
+        </motion.div>
+
+        {/* Stats Row */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="grid grid-cols-3 gap-3 sm:gap-4 mb-16 lg:mb-20"
+        >
+          {impactStats.map((stat, i) => {
+            const Icon = stat.icon;
+            return (
+              <div
+                key={i}
+                className="group relative flex items-center gap-3 sm:gap-4 p-4 sm:p-5 rounded-2xl bg-white border border-[#EFE3D0] shadow-[0_2px_10px_-4px_rgba(70,45,25,0.06)] hover:shadow-[0_12px_28px_-14px_rgba(70,45,25,0.2)] hover:border-[#E0CFB5] transition-all duration-300"
+              >
+                <div className="w-10 h-10 sm:w-11 sm:h-11 shrink-0 rounded-xl bg-[#F5EFE6] flex items-center justify-center text-[#7A5A3F] group-hover:bg-[#1A1614] group-hover:text-[#E8B97E] transition-colors duration-300">
+                  <Icon size={18} strokeWidth={1.8} />
+                </div>
+                <div className="min-w-0">
+                  <div className="font-sora text-[1.5rem] sm:text-[1.75rem] font-semibold tracking-tight text-[#1A1614] leading-none mb-1">
+                    {stat.value}
+                  </div>
+                  <div className="text-[10.5px] sm:text-[11px] font-semibold tracking-[0.14em] uppercase text-[#8B8680]">
+                    {stat.label}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </motion.div>
+
+        {/* Experience entries */}
+        <div className="flex flex-col gap-10 lg:gap-12">
+          {experiences.map((exp, index) => (
+            <TimelineItem key={index} data={exp} index={index} />
+          ))}
         </div>
 
       </div>
@@ -124,88 +148,144 @@ export default function ExperienceSection() {
   );
 }
 
-function TimelineItem({ data, index }: { data: any, index: number }) {
-  const isLeft = index % 2 === 0;
-
+function TimelineItem({ data, index }: { data: Experience; index: number }) {
   return (
-    <div className={`relative flex flex-col lg:flex-row gap-8 lg:gap-0 ${isLeft ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-start w-full group`}>
-      
-      {/* Date Marker (Center) */}
-      <div className="absolute left-[20px] lg:left-1/2 top-0 -translate-x-1/2 flex flex-col items-center">
-        <motion.div 
-          initial={{ scale: 0 }}
-          whileInView={{ scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ type: "spring", stiffness: 300, delay: 0.2 }}
-          className={`w-8 h-8 lg:w-10 lg:h-10 rounded-full border-4 border-[#0C1519] z-20 flex items-center justify-center shadow-[0_0_20px_rgba(207,157,123,0.3)] ${data.isOngoing ? 'bg-[#CF9D7B] animate-pulse' : 'bg-[#CF9D7B]'}`}
-        >
-           <div className="w-2.5 h-2.5 lg:w-3 lg:h-3 bg-[#0C1519] rounded-full" />
-        </motion.div>
-      </div>
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-10%' }}
+      transition={{ duration: 0.6, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
+      className="relative group/card"
+    >
+      {/* Ambient warm bloom behind the card */}
+      <div
+        aria-hidden="true"
+        className="absolute -inset-6 lg:-inset-8 -z-10 opacity-0 group-hover/card:opacity-100 transition-opacity duration-700"
+        style={{
+          background:
+            'radial-gradient(60% 60% at 20% 25%, rgba(232,185,126,0.18), transparent 70%), radial-gradient(50% 60% at 85% 75%, rgba(199,127,69,0.10), transparent 70%)',
+          filter: 'blur(20px)',
+        }}
+      />
+      <div
+        aria-hidden="true"
+        className="absolute -inset-4 lg:-inset-6 -z-10"
+        style={{
+          background:
+            'radial-gradient(45% 60% at 18% 20%, rgba(242,229,210,0.55), transparent 70%)',
+          filter: 'blur(28px)',
+        }}
+      />
 
-      {/* Content Card */}
-      <motion.div 
-        initial={{ opacity: 0, x: isLeft ? -50 : 50 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.1 }}
-        className={`w-full lg:w-[calc(50%-60px)] pl-16 lg:pl-0 ${isLeft ? 'lg:pr-12 lg:text-right' : 'lg:pl-12 lg:text-left'}`}
-      >
-        <div className={`inline-flex items-center gap-2 mb-4 px-4 py-1.5 rounded-full bg-[#CF9D7B]/10 border border-[#CF9D7B]/30 text-xs font-bold text-[#CF9D7B] uppercase tracking-wider ${isLeft ? 'lg:flex-row-reverse' : ''}`}>
-           <Calendar size={14} />
-           {data.period}
-        </div>
-        
-        <h3 className="text-3xl lg:text-4xl font-bold text-[#E0E0E0] mb-2 leading-tight">
-          {data.title}
-        </h3>
-        
-        <div className={`flex items-center gap-2 text-lg text-[#A0A0A0] font-medium mb-6 ${isLeft ? 'lg:justify-end' : 'lg:justify-start'}`}>
-           <span className="text-[#CF9D7B]">{data.company}</span>
-           <span className="w-1.5 h-1.5 bg-[#3A3534] rounded-full" />
-           <span>{data.location}</span>
-        </div>
+      {/* Card */}
+      <article className="relative rounded-[26px] bg-white border border-[#EFE3D0] shadow-[0_8px_28px_-14px_rgba(70,45,25,0.16),0_2px_10px_-6px_rgba(70,45,25,0.08)] group-hover/card:shadow-[0_28px_60px_-22px_rgba(70,45,25,0.28),0_8px_20px_-10px_rgba(70,45,25,0.12)] group-hover/card:-translate-y-0.5 group-hover/card:border-[#E0CFB5] transition-all duration-500 overflow-hidden">
 
-        <div className={`flex flex-wrap gap-2 mb-8 ${isLeft ? 'lg:justify-end' : 'lg:justify-start'}`}>
-            {data.tags.map((tag: string) => (
-              <span key={tag} className="px-3 py-1 text-xs font-semibold text-[#0C1519] bg-[#CF9D7B] rounded-md shadow-lg shadow-[#CF9D7B]/10">
-                {tag}
-              </span>
-            ))}
-        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-8 gap-y-5 p-5 sm:p-6 lg:p-7">
 
-        <p className={`text-gray-300 leading-relaxed mb-8 ${isLeft ? 'ml-auto' : ''} max-w-lg`}>
-          {data.impactSummary}
-        </p>
+          {/* LEFT — Meta column */}
+          <div className="lg:col-span-4 flex flex-col gap-3.5">
 
-        {/* Outcomes Box */}
-        <div className={`relative p-6 rounded-2xl bg-gradient-to-br from-[#162127]/50 to-transparent border border-[#3A3534] overflow-hidden hover:border-[#CF9D7B]/50 transition-colors group/box`}>
-           <div className="absolute inset-0 bg-[#CF9D7B]/5 opacity-0 group-hover/box:opacity-100 transition-opacity duration-500" />
-           <h4 className="flex items-center gap-2 text-sm font-bold text-[#CF9D7B] uppercase tracking-wider mb-4">
-              <Sparkles size={16} /> Key Outcomes
-           </h4>
-           <div className="space-y-4">
-              {data.keyOutcomes.map((item: any, i: number) => {
-                 const Icon = item.icon;
-                 return (
-                   <div key={i} className={`flex items-start gap-4 ${isLeft ? 'lg:flex-row-reverse' : ''}`}>
-                      <div className="p-2 rounded-lg bg-[#CF9D7B]/10 text-[#CF9D7B]">
-                         <Icon size={16} />
-                      </div>
-                      <span className="text-sm text-[#E0E0E0] font-medium pt-1.5">
-                        {item.text}
-                      </span>
-                   </div>
-                 )
+            {/* Period + status chips */}
+            <div className="flex flex-wrap items-center gap-1.5">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#F5EFE6] border border-[#EFE3D0] text-[11.5px] font-semibold text-[#7A5A3F]">
+                <Calendar size={11} strokeWidth={2.2} />
+                {data.period}
+              </div>
+              {data.isOngoing && (
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#E8F5EC] border border-[#CFE5D6] text-[11.5px] font-semibold text-[#2F7A4A]">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="absolute inline-flex h-full w-full rounded-full bg-[#2F7A4A] animate-ping opacity-70" />
+                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#2F7A4A]" />
+                  </span>
+                  Ongoing
+                </div>
+              )}
+              {data.isLeadership && (
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#1A1614] text-white text-[11.5px] font-semibold">
+                  <Award size={11} strokeWidth={2.2} className="text-[#E8B97E]" />
+                  Leadership
+                </div>
+              )}
+            </div>
+
+            {/* Organization block */}
+            <div className="pt-1">
+              <div className="text-[9.5px] font-semibold tracking-[0.18em] uppercase text-[#A39A8E] font-sora mb-1.5">
+                Organization
+              </div>
+              <div className="text-[14px] font-semibold text-[#7A5A3F] leading-snug">
+                {data.company}
+              </div>
+              <div className="inline-flex items-center gap-1.5 text-[12.5px] text-[#8B8680] font-medium mt-1.5">
+                <MapPin size={12} strokeWidth={2} />
+                {data.location}
+              </div>
+            </div>
+
+            {/* Tags */}
+            <div className="flex flex-wrap gap-1.5 pt-1">
+              {data.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="inline-flex items-center px-2 py-0.5 text-[11px] font-medium text-[#5A5550] bg-white border border-[#E8E2D9] rounded-full hover:bg-[#FAF6EF] hover:border-[#D9CFBE] hover:text-[#1A1614] transition-colors duration-200"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* RIGHT — Title + content */}
+          <div className="lg:col-span-8 flex flex-col">
+
+            {/* Title */}
+            <h3 className="font-sora font-semibold tracking-[-0.02em] text-[#1A1614] text-[1.6rem] sm:text-[1.85rem] lg:text-[2rem] leading-[1.05]">
+              {data.title}
+            </h3>
+
+            {/* Hairline accent */}
+            <div className="mt-3 mb-4 flex items-center gap-2">
+              <span className="h-[2px] w-8 rounded-full bg-[#C77F45]" />
+              <span className="h-[2px] w-2 rounded-full bg-[#C77F45]/30" />
+            </div>
+
+            {/* Impact Summary */}
+            <p className="text-[14.5px] lg:text-[15px] text-[#4A4540] leading-[1.7] mb-5 max-w-[60ch]">
+              {data.impactSummary}
+            </p>
+
+            {/* Key Outcomes header */}
+            <div className="flex items-center gap-2 mb-3">
+              <Sparkles size={12} strokeWidth={2.2} className="text-[#C77F45]" />
+              <h4 className="text-[10.5px] font-semibold tracking-[0.2em] uppercase text-[#7A5A3F] font-sora">
+                Key Outcomes
+              </h4>
+              <span className="flex-1 h-[1px] bg-gradient-to-r from-[#EFE3D0] to-transparent ml-1" />
+            </div>
+
+            {/* Key Outcomes — compact stacked rows with hairline separators */}
+            <ul className="flex flex-col">
+              {data.keyOutcomes.map((item, i) => {
+                const Icon = item.icon;
+                const isLast = i === data.keyOutcomes.length - 1;
+                return (
+                  <li
+                    key={i}
+                    className={`group/outcome flex items-start gap-3 py-2.5 ${isLast ? '' : 'border-b border-dashed border-[#EFE3D0]'}`}
+                  >
+                    <div className="w-7 h-7 shrink-0 rounded-lg bg-[#F5EFE6] flex items-center justify-center text-[#7A5A3F] group-hover/outcome:bg-[#1A1614] group-hover/outcome:text-[#E8B97E] transition-colors duration-300">
+                      <Icon size={12.5} strokeWidth={2} />
+                    </div>
+                    <span className="text-[13.5px] lg:text-[14px] text-[#3A3530] leading-[1.55] pt-1">
+                      {item.text}
+                    </span>
+                  </li>
+                );
               })}
-           </div>
+            </ul>
+          </div>
         </div>
-
-      </motion.div>
-
-      {/* Spacer for the other side */}
-      <div className="hidden lg:block w-[calc(50%-60px)]" />
-      
-    </div>
-  )
+      </article>
+    </motion.div>
+  );
 }

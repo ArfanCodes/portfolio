@@ -1,10 +1,9 @@
 'use client';
 
-import { motion, useScroll, useTransform, MotionValue } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Github, Award, ArrowUpRight, Trophy, Globe } from 'lucide-react';
-import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { useRef } from 'react';
+import { ImageFrame } from '@/components/ui/ImageFrame';
 
 const projects = [
   {
@@ -62,60 +61,68 @@ const projects = [
 ];
 
 export default function ProjectsSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  // We actually don't need global scroll progress for the sticky effect effectively in plain CSS + simple framer, 
-  // but let's verify if we want scaling. Scaling adds a nice touch.
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end end']
-  });
-
   return (
-    <section id="projects" className="py-24 lg:py-32 bg-[#0C1519] relative overflow-hidden">
-      {/* Background Decor */}
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#CF9D7B]/10 rounded-full blur-[120px] opacity-50 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#724B39]/10 rounded-full blur-[100px] opacity-50 pointer-events-none" />
+    <section
+      id="projects"
+      className="relative py-20 lg:py-28 bg-[#FAF8F5] text-[#1A1614] overflow-hidden"
+    >
+      {/* Soft warm ambient background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-[10%] right-[-10%] w-[620px] h-[620px] rounded-full bg-[#F2E5D2] blur-[140px] opacity-60" />
+        <div className="absolute bottom-[5%] left-[-15%] w-[620px] h-[620px] rounded-full bg-[#EFE4D4] blur-[160px] opacity-50" />
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage:
+              'radial-gradient(circle at 1px 1px, #1A1614 1px, transparent 0)',
+            backgroundSize: '28px 28px',
+          }}
+        />
+      </div>
 
-      <div className="container mx-auto px-6 lg:px-8 relative z-10" ref={containerRef}>
-        
+      <div className="container mx-auto px-6 lg:px-10 relative z-10">
+
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-20 lg:mb-32"
+          className="max-w-3xl mb-14 lg:mb-20"
         >
-          <span className="inline-block py-1 px-3 rounded-full bg-[#162127] border border-[#3A3534] text-[#CF9D7B] text-sm font-semibold tracking-wide mb-4">
-            FEATURED WORK
-          </span>
-          <h2 className="text-4xl lg:text-5xl font-bold text-[#CF9D7B] mb-6 tracking-tight">
-            Selected Projects
-          </h2>
-          <p className="text-lg font-medium text-[#A0A0A0] max-w-2xl mx-auto leading-relaxed">
+          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/80 backdrop-blur-md border border-[#E8E2D9] shadow-[0_2px_10px_-4px_rgba(60,40,20,0.08)] mb-6">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#C77F45]" />
+            <span className="text-[11px] font-semibold tracking-[0.18em] uppercase text-[#5A5550] font-sora">
+              FEATURED WORK
+            </span>
+          </div>
+
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
+            <h2 className="font-sora font-semibold tracking-[-0.025em] leading-[1.02] text-[#1A1614] text-4xl sm:text-5xl lg:text-[3.5rem]">
+              Selected Projects
+              <span className="text-[#C77F45]">.</span>
+            </h2>
+            <div className="hidden lg:flex items-center gap-3 text-[#8B8680] text-sm font-medium font-sora pb-2">
+              <span className="h-[1px] w-10 bg-[#D9CFBE]" />
+              <span>{String(projects.length).padStart(2, '0')} case studies</span>
+            </div>
+          </div>
+
+          <p className="mt-5 text-lg text-[#5A5550] max-w-2xl leading-relaxed">
             Production-ready applications solving real-world problems with modern architecture.
           </p>
         </motion.div>
 
-        {/* Stacking Cards Container */}
-        <div className="flex flex-col gap-10">
-          {projects.map((project, index) => {
-            // Calculate a target scale based on index to create depth
-            // We can just rely on sticky behavior for the main effect, and add a simple motion Viewport.
-            // For a true parallax stack, we need the containerRef pattern, but usually CSS Sticky is easier and more performant.
-            const targetScale = 1 - ((projects.length - index) * 0.05);
-            return (
-              <Card 
-                key={index} 
-                i={index} 
-                {...project} 
-                progress={scrollYProgress} 
-                range={[index * 0.25, 1]} 
-                targetScale={targetScale} 
-              />
-            )
-          })}
+        {/* Case Studies */}
+        <div className="flex flex-col gap-20 lg:gap-28">
+          {projects.map((project, index) => (
+            <Card
+              key={project.title}
+              i={index}
+              total={projects.length}
+              {...project}
+            />
+          ))}
         </div>
       </div>
     </section>
@@ -124,6 +131,7 @@ export default function ProjectsSection() {
 
 interface CardProps {
   i: number;
+  total: number;
   title: string;
   event?: string;
   outcome: string;
@@ -137,151 +145,186 @@ interface CardProps {
   liveLink?: string;
   isFlagship: boolean;
   image: string;
-  color: string;
-  progress: MotionValue<number>;
-  range: [number, number];
-  targetScale: number;
 }
 
-const Card = ({ i, title, event, outcome, role, award, awardOrg, whatIBuilt, impact, techStack, github, liveLink, isFlagship, image, color, progress, range, targetScale }: CardProps) => {
-  const container = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: container,
-    offset: ['start end', 'start start']
-  })
+const Card = ({
+  i,
+  total,
+  title,
+  event,
+  outcome,
+  role,
+  award,
+  awardOrg,
+  whatIBuilt,
+  impact,
+  techStack,
+  github,
+  liveLink,
+  isFlagship,
+  image,
+}: CardProps) => {
+  const reverse = i % 2 === 1;
 
-  // Scale animation for desktop stacking effect
-  const scale = useTransform(progress, range, [1, targetScale]);
-  
   return (
-    <div ref={container} className="w-full flex items-center justify-center lg:h-screen lg:sticky lg:top-0 py-10 lg:py-0">
-      <motion.div 
-        className={`relative flex flex-col lg:flex-row gap-8 lg:gap-12 bg-[#162127] rounded-3xl p-6 lg:p-12 shadow-2xl border border-[#3A3534] w-full max-w-6xl origin-top ${title === 'FINO' ? 'items-center' : 'items-stretch'}`}
-        style={{ 
-          backgroundColor: color, 
-          scale: typeof window !== 'undefined' && window.innerWidth >= 1024 ? scale : 1,
-          top: typeof window !== 'undefined' && window.innerWidth >= 1024 ? `calc(-5% + ${i * 25}px)` : 0
-        }}
-        initial={{ y: 50, opacity: 0 }}
-        whileInView={{ y: 0, opacity: 1 }}
-        viewport={{ once: true, margin: "-10%" }}
-        transition={{ duration: 0.5 }}
-      >
-        {/* Left: Content */}
-        <div className="flex flex-col justify-between w-full lg:w-1/2 gap-6 lg:gap-8">
-          <div>
-            <div className="flex flex-col gap-1 mb-4">
-              <h3 className="text-2xl lg:text-3xl font-bold font-sora tracking-tight text-[#E0E0E0]">{title}</h3>
-              {event && (
-                <span className="text-[#CF9D7B] font-bold text-sm uppercase tracking-widest opacity-80">
-                  {event}
-                </span>
+    <motion.article
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-10%' }}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      className="relative"
+    >
+      {/* Counter row */}
+      <div className="flex items-center gap-4 mb-6 lg:mb-8">
+        <span className="font-sora text-[12px] font-semibold tracking-[0.2em] text-[#A39A8E]">
+          {String(i + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
+        </span>
+        <span className="h-[1px] flex-1 bg-gradient-to-r from-[#E0D3BC] to-transparent" />
+        {event && (
+          <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold tracking-[0.16em] uppercase text-[#7A5A3F] font-sora">
+            <span className="h-1 w-1 rounded-full bg-[#C77F45]" />
+            {event}
+          </span>
+        )}
+      </div>
+
+      <div className={`grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center ${reverse ? 'lg:[&>*:first-child]:order-2' : ''}`}>
+
+        {/* IMAGE SHOWCASE */}
+        <div className="lg:col-span-7">
+          <motion.div
+            initial={{ scale: 0.96 }}
+            whileInView={{ scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="relative group"
+          >
+            {/* Floating warm glow */}
+            <div className="absolute -inset-6 lg:-inset-10 bg-gradient-to-br from-[#F5E7D2] via-[#F8EFE2] to-[#FFFFFF] rounded-[2.5rem] blur-2xl opacity-70 -z-10" />
+            <div className="absolute -bottom-8 -right-4 w-32 h-32 rounded-full bg-[#F0E4D4] blur-2xl opacity-70 -z-10" />
+
+            {/* Image frame */}
+            <div className="relative rounded-[1.75rem] overflow-hidden bg-gradient-to-br from-[#F8F1E6] to-[#F0E4D4] ring-1 ring-white/80 border border-[#EFE3D0] shadow-[0_40px_80px_-30px_rgba(70,45,25,0.28),0_12px_30px_-12px_rgba(70,45,25,0.15)] aspect-[16/10]">
+              <ImageFrame
+                src={image}
+                alt={title}
+                fill
+                imageClassName="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
+                sizes="(max-width: 1024px) 100vw, 60vw"
+                fallbackLabel="Screenshot unavailable"
+              />
+
+              {/* Soft top sheen */}
+              <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-white/30 to-transparent pointer-events-none" />
+
+              {/* Award badges */}
+              {(isFlagship || award) && (
+                <div className="absolute top-5 left-5 z-20 flex flex-col items-start gap-2">
+                  {isFlagship && (
+                    <div className="bg-white/95 backdrop-blur-xl text-[#1A1614] px-3.5 py-1.5 rounded-full text-[11px] font-semibold shadow-[0_8px_20px_-8px_rgba(70,45,25,0.3)] flex items-center gap-1.5 border border-white">
+                      <Award size={12} className="text-[#C77F45]" strokeWidth={2.2} />
+                      FLAGSHIP
+                    </div>
+                  )}
+                  {award && (
+                    <div className="bg-[#1A1614] text-white px-3.5 py-1.5 rounded-full text-[11px] font-semibold shadow-[0_8px_20px_-8px_rgba(26,22,20,0.45)] flex items-center gap-1.5 border border-[#1A1614]">
+                      <Trophy size={12} className="text-[#E8B97E]" strokeWidth={2.2} />
+                      {award.toUpperCase()}
+                    </div>
+                  )}
+                </div>
               )}
             </div>
-            
-            {/* Mobile Award Badge */}
-            {award && (
-               <div className="lg:hidden mb-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#724B39] text-[#CF9D7B] text-[10px] font-bold border border-[#3A3534] shadow-sm animate-pulse">
-                  <Trophy size={12} className="fill-[#CF9D7B]" /> {award.toUpperCase()}
-               </div>
-            )}
+          </motion.div>
+        </div>
 
-            <p className="font-sans text-lg lg:text-xl text-white/95 leading-8 font-normal mb-4 lg:mb-6">
-              {outcome}
-            </p>
+        {/* CONTENT */}
+        <div className="lg:col-span-5 flex flex-col">
 
-            <div className="flex flex-wrap gap-2 text-sm font-bold text-[#A0A0A0] mb-6">
-              <span className="px-3 py-1.5 bg-[#0C1519]/60 rounded-md border border-[#3A3534]">
+          {/* Title block */}
+          <div className="mb-6">
+            <h3 className="font-sora font-semibold tracking-[-0.02em] text-[#1A1614] text-3xl sm:text-4xl lg:text-[2.75rem] leading-[1.05]">
+              {title}
+            </h3>
+
+            <div className="flex flex-wrap items-center gap-2 mt-4">
+              <span className="inline-flex items-center px-3 py-1 rounded-full bg-white border border-[#EFE3D0] text-[12px] font-medium text-[#5A5550] shadow-[0_1px_4px_-1px_rgba(70,45,25,0.06)]">
                 {role}
               </span>
               {awardOrg && (
-                <span className="px-3 py-1.5 bg-[#0C1519]/60 rounded-md border border-[#3A3534] truncate max-w-[200px] hidden sm:block">
+                <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#F5EFE6] border border-[#EFE3D0] text-[12px] font-medium text-[#7A5A3F]">
                   {awardOrg}
                 </span>
               )}
             </div>
-
-            <ul className="space-y-3 mb-8">
-              {whatIBuilt.map((item, index) => (
-                <li key={index} className="flex items-start gap-3 font-sans text-base lg:text-lg text-[#E0E0E0]/90 leading-relaxed">
-                  <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#CF9D7B] shrink-0" />
-                  <span className="leading-relaxed">{item}</span>
-                </li>
-              ))}
-            </ul>
-
-            <div className="p-4 lg:p-5 rounded-xl bg-[#0C1519]/50 border border-[#3A3534]/50 mb-8">
-               <p className="text-[#E0E0E0] font-bold text-sm lg:text-base">
-                 <span className="block text-[10px] uppercase tracking-wider opacity-70 mb-1 text-[#CF9D7B]">Impact</span>
-                 {impact}
-               </p>
-            </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-            <div className="flex flex-wrap gap-2 max-w-xs">
-              {techStack.map((tech) => (
-                <span key={tech} className="px-2 lg:px-3 py-1 text-[10px] lg:text-xs font-semibold text-[#A0A0A0] bg-[#0C1519] border border-[#3A3534] rounded-full">
-                  {tech}
-                </span>
-              ))}
-            </div>
+          {/* Outcome */}
+          <p className="text-[1.0625rem] lg:text-[1.125rem] text-[#3A3530] leading-[1.7] mb-7">
+            {outcome}
+          </p>
 
-            <div className="flex flex-wrap sm:flex-nowrap gap-3 w-full sm:w-auto">
-              {github && (
-                <Button 
-                  className="w-full sm:w-auto bg-[#724B39] hover:bg-[#5C3A2A] text-[#E0E0E0] rounded-full px-8 py-6 text-base font-bold shadow-xl transition-transform hover:-translate-y-1"
-                  asChild
-                >
-                  <a href={github} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
-                    <Github size={20} />
-                    <span>Source</span>
-                    <ArrowUpRight size={18} />
-                  </a>
-                </Button>
-              )}
-              {liveLink && (
-                <Button 
-                  className="w-full sm:w-auto bg-[#CF9D7B] hover:bg-[#B38363] text-[#0C1519] rounded-full px-8 py-6 text-base font-bold shadow-xl transition-transform hover:-translate-y-1"
-                  asChild
-                >
-                  <a href={liveLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
-                    <Globe size={20} />
-                    <span>Live Preview</span>
-                    <ArrowUpRight size={18} />
-                  </a>
-                </Button>
-              )}
+          {/* What I Built */}
+          <ul className="space-y-3.5 mb-7">
+            {whatIBuilt.map((item, idx) => (
+              <li key={idx} className="flex items-start gap-3 text-[15px] text-[#4A4540] leading-[1.65]">
+                <span className="mt-2 h-[2px] w-3.5 bg-[#C77F45] rounded-full shrink-0" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+
+          {/* Impact */}
+          <div className="relative p-4 lg:p-5 rounded-2xl bg-white/80 backdrop-blur-sm border border-[#EFE3D0] shadow-[0_2px_12px_-6px_rgba(70,45,25,0.12)] mb-7">
+            <div className="absolute -top-2 left-5 px-2 py-0.5 bg-[#1A1614] text-white text-[9px] tracking-[0.2em] uppercase rounded-full font-sora font-medium">
+              Impact
             </div>
+            <p className="text-[14px] lg:text-[15px] text-[#2A2420] font-medium leading-[1.6] pt-1">
+              {impact}
+            </p>
+          </div>
+
+          {/* Tech Stack */}
+          <div className="flex flex-wrap gap-1.5 mb-8">
+            {techStack.map((tech) => (
+              <span
+                key={tech}
+                className="inline-flex items-center px-2.5 py-1 text-[11.5px] font-medium text-[#5A5550] bg-white/70 border border-[#E8E2D9] rounded-full hover:bg-white hover:border-[#D9CFBE] hover:text-[#1A1614] transition-colors duration-200"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+
+          {/* CTAs */}
+          <div className="flex flex-wrap gap-3">
+            {liveLink && (
+              <Button
+                asChild
+                className="group bg-[#1A1614] hover:bg-[#2A2420] text-white rounded-full px-6 py-5 text-[14px] font-semibold shadow-[0_10px_24px_-10px_rgba(26,22,20,0.55)] hover:shadow-[0_14px_30px_-10px_rgba(26,22,20,0.6)] hover:-translate-y-[1px] transition-all duration-300"
+              >
+                <a href={liveLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 font-sora">
+                  <Globe size={15} strokeWidth={2.2} />
+                  <span>Live Preview</span>
+                  <ArrowUpRight size={15} strokeWidth={2.2} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </a>
+              </Button>
+            )}
+            {github && (
+              <Button
+                asChild
+                className="group bg-white hover:bg-[#FAF6EF] border border-[#E0D3BC] text-[#1A1614] rounded-full px-6 py-5 text-[14px] font-semibold shadow-[0_2px_10px_-4px_rgba(70,45,25,0.08)] hover:-translate-y-[1px] transition-all duration-300"
+              >
+                <a href={github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 font-sora">
+                  <Github size={15} strokeWidth={2.2} />
+                  <span>Source</span>
+                  <ArrowUpRight size={15} strokeWidth={2.2} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </a>
+              </Button>
+            )}
           </div>
         </div>
-
-        {/* Right: Image */}
-        <div className={`relative w-full lg:w-1/2 rounded-2xl overflow-hidden shadow-xl border border-[#3A3534] bg-[#0C1519] group ${title === 'FINO' ? 'aspect-video' : 'aspect-video lg:aspect-auto lg:h-auto min-h-[200px]'}`}>
-          <Image
-            src={image}
-            alt={title}
-            fill
-            className="object-cover transition-transform duration-700 group-hover:scale-105"
-          />
-          
-          {/* Desktop Award Badge */}
-          {award && (
-            <div className="hidden lg:flex absolute top-6 left-6 z-20 flex-col items-start gap-2">
-               {isFlagship && (
-                  <div className="bg-[#162127] text-[#CF9D7B] px-4 py-2 rounded-full text-xs font-bold shadow-lg flex items-center gap-2 border border-[#CF9D7B]/20 backdrop-blur-md">
-                    <Award size={14} />
-                    FLAGSHIP
-                  </div>
-               )}
-               <div className="bg-[#CF9D7B]/90 text-[#0C1519] px-4 py-2 rounded-full text-xs font-extrabold shadow-lg flex items-center gap-2 border border-[#3A3534]/10 backdrop-blur-md animate-pulse">
-                  <Trophy size={14} className="fill-[#0C1519]" />
-                  {award.toUpperCase()}
-               </div>
-            </div>
-          )}
-        </div>
-      </motion.div>
-    </div>
-  )
-}
+      </div>
+    </motion.article>
+  );
+};

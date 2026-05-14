@@ -127,10 +127,16 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    background-color: #FAF8F5;
+    color: #1A1614;
   }
   html {
     scroll-behavior: smooth;
+    background-color: #FAF8F5;
+  }
+  ::selection {
+    background-color: #F0E4D4;
+    color: #1A1614;
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-sora), sans-serif;
@@ -178,6 +184,39 @@
 
 .animate-gradient {
   animation: gradient 3s ease infinite;
+}
+
+/* Premium shimmer for skeletons */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+.skeleton-shimmer {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #F5EFE6 0%, #F0E4D4 50%, #F5EFE6 100%);
+}
+.skeleton-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.55) 50%,
+    transparent 100%
+  );
+  animation: shimmer 1.8s ease-in-out infinite;
+}
+
+/* Soft float for orbital ambient elements */
+@keyframes softFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(18px, -28px) scale(1.05); }
+  66% { transform: translate(-14px, 14px) scale(0.97); }
+}
+.animate-soft-float {
+  animation: softFloat 14s ease-in-out infinite;
 }
 
 @keyframes slideInLeft {

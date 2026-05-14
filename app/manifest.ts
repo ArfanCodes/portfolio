@@ -3,12 +3,12 @@ import { MetadataRoute } from 'next';
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'Mohammed Arfan Portfolio',
-    short_name: 'Arfan',
+    short_name: 'ArfanCodes',
     description: 'Production-ready mobile apps and full-stack development portfolio',
     start_url: '/',
     display: 'standalone',
-    background_color: '#ffffff',
-    theme_color: '#5D0D18',
+    background_color: '#FAF8F5',
+    theme_color: '#1A1614',
     icons: [
       {
         src: '/icon-192.png',

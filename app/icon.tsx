@@ -1,18 +1,14 @@
-
 import { ImageResponse } from 'next/og';
 
-// Image metadata
 export const size = {
   width: 32,
   height: 32,
 };
 export const contentType = 'image/png';
 
-// Image generation
 export default function Icon() {
   return new ImageResponse(
     (
-      // ImageResponse JSX element
       <div
         style={{
           width: '100%',
@@ -20,28 +16,44 @@ export default function Icon() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          background: 'linear-gradient(135deg, #CF9D7B, #724B39)',
-          borderRadius: '8px',
+          background: '#1A1614',
+          borderRadius: '7px',
         }}
       >
-        <div
-          style={{
-            fontSize: 22,
-            color: '#0C1519',
-            fontWeight: 800,
-            fontFamily: 'sans-serif',
-            letterSpacing: '-0.05em',
-            marginTop: '-2px', // Optical alignment
-          }}
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          MA
-        </div>
+          {/* Left chevron */}
+          <path
+            d="M9 7.5 L4.5 12 L9 16.5"
+            stroke="#E8B97E"
+            strokeWidth="2.4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          {/* Right chevron */}
+          <path
+            d="M15 7.5 L19.5 12 L15 16.5"
+            stroke="#E8B97E"
+            strokeWidth="2.4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          {/* Slash */}
+          <path
+            d="M14 5.5 L10 18.5"
+            stroke="#C77F45"
+            strokeWidth="2.4"
+            strokeLinecap="round"
+          />
+        </svg>
       </div>
     ),
-    // ImageResponse options
     {
-      // For convenience, we can re-use the exported icons size metadata
-      // config to also set the ImageResponse's width and height.
       ...size,
     }
   );

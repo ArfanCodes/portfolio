@@ -2,17 +2,19 @@
 
 import { motion } from 'framer-motion';
 import { FileText, Smartphone, Code, Server, Database, CheckCircle, Zap, Layout, Cloud } from 'lucide-react';
-import { 
-  SiReact, 
-  SiTypescript, 
-  SiJavascript, 
-  SiTailwindcss, 
-  SiNodedotjs, 
-  SiExpress, 
-  SiPostgresql, 
-  SiSupabase, 
-  SiAmazon, 
-  SiGit, 
+import type { LucideIcon } from 'lucide-react';
+import type { IconType } from 'react-icons';
+import {
+  SiReact,
+  SiTypescript,
+  SiJavascript,
+  SiTailwindcss,
+  SiNodedotjs,
+  SiExpress,
+  SiPostgresql,
+  SiSupabase,
+  SiAmazon,
+  SiGit,
   SiGithub,
   SiSqlite,
   SiPython,
@@ -25,7 +27,20 @@ import {
   SiFirebase
 } from 'react-icons/si';
 
-const skillCategories = [
+interface Skill {
+  name: string;
+  icon: IconType | LucideIcon;
+  color: string;
+}
+
+interface SkillCategory {
+  title: string;
+  icon: LucideIcon;
+  primarySkills: Skill[];
+  secondarySkills: Skill[];
+}
+
+const skillCategories: SkillCategory[] = [
   {
     title: 'Languages',
     icon: Code,
@@ -107,6 +122,9 @@ const skillCategories = [
   },
 ];
 
+// Map "#ffffff" brand-default to a tasteful dark warm tone for light theme
+const resolveIconColor = (color: string) => (color === '#ffffff' ? '#1A1614' : color);
+
 export default function SkillsSection() {
   const totalSkills = skillCategories.reduce(
     (acc, cat) => acc + cat.primarySkills.length + cat.secondarySkills.length,
@@ -114,115 +132,123 @@ export default function SkillsSection() {
   );
 
   return (
-    <section id="skills" className="py-24 lg:py-32 relative bg-[#0C1519] overflow-hidden text-[#E0E0E0]">
-      
-      {/* Background Decor: Matrix Grid */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-10">
-        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <pattern id="smallGrid" width="20" height="20" patternUnits="userSpaceOnUse">
-                    <circle cx="1" cy="1" r="1" fill="#CF9D7B" />
-                </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#smallGrid)" />
-        </svg>
+    <section
+      id="skills"
+      className="relative py-20 lg:py-28 bg-[#FAF8F5] text-[#1A1614] overflow-hidden"
+    >
+      {/* Soft warm ambient background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-[10%] right-[-10%] w-[560px] h-[560px] rounded-full bg-[#F2E5D2] blur-[150px] opacity-55" />
+        <div className="absolute bottom-[10%] left-[-10%] w-[560px] h-[560px] rounded-full bg-[#EFE4D4] blur-[150px] opacity-50" />
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage:
+              'radial-gradient(circle at 1px 1px, #1A1614 1px, transparent 0)',
+            backgroundSize: '28px 28px',
+          }}
+        />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-        {/* Header */}
+      <div className="container mx-auto px-6 lg:px-10 relative z-10">
+
+        {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-20"
+          className="mb-12 lg:mb-16"
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="inline-block mb-4"
-          >
-            <span className="px-4 py-2 bg-[#CF9D7B]/10 border border-[#CF9D7B]/20 text-[#CF9D7B] rounded-full text-sm font-bold tracking-wide shadow-lg">
-              TECHNICAL EXPERTISE
-            </span>
-          </motion.div>
-          
-          <h2 className="text-4xl lg:text-5xl font-bold text-[#E0E0E0] mb-6 tracking-tight">
-            Skills & <span className="text-[#CF9D7B]">Technologies</span>
-          </h2>
-          
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed mb-10">
-            A comprehensive arsenal of tools for building scalable, high-performance applications.
-          </p>
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+            <div className="max-w-3xl">
+              <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/80 backdrop-blur-md border border-[#E8E2D9] shadow-[0_2px_10px_-4px_rgba(60,40,20,0.08)] mb-6">
+                <Zap size={12} strokeWidth={2.2} className="text-[#C77F45]" />
+                <span className="text-[11px] font-semibold tracking-[0.18em] uppercase text-[#5A5550] font-sora">
+                  TECHNICAL EXPERTISE
+                </span>
+              </div>
 
-          {/* Stats Bar */}
-          <div className="inline-flex items-center gap-8 lg:gap-12 px-8 py-4 bg-[#162127]/50 rounded-2xl border border-[#3A3534] backdrop-blur-sm">
-             <div className="flex items-center gap-3">
-                <div className="p-2 bg-[#CF9D7B] rounded-lg text-[#0C1519]"><Zap size={20} /></div>
-                <div className="text-left leading-tight">
-                   <div className="text-xl font-bold text-[#E0E0E0]">{totalSkills}+</div>
-                   <div className="text-xs text-[#CF9D7B]/70 font-medium uppercase tracking-wide">Technologies</div>
-                </div>
-             </div>
-             <div className="w-px h-10 bg-[#3A3534]" />
-             <div className="flex items-center gap-3">
-                <div className="p-2 bg-[#CF9D7B] rounded-lg text-[#0C1519]"><CheckCircle size={20} /></div>
-                <div className="text-left leading-tight">
-                   <div className="text-xl font-bold text-[#E0E0E0]">{skillCategories.length}</div>
-                   <div className="text-xs text-[#CF9D7B]/70 font-medium uppercase tracking-wide">Domains</div>
-                </div>
-             </div>
+              <h2 className="font-sora font-semibold tracking-[-0.025em] leading-[1.02] text-[#1A1614] text-4xl sm:text-5xl lg:text-[3.5rem]">
+                Skills <span className="text-[#C77F45]">&amp; Technologies</span>
+              </h2>
+
+              <p className="mt-5 text-lg text-[#5A5550] max-w-2xl leading-relaxed">
+                A comprehensive arsenal of tools for building scalable, high-performance applications.
+              </p>
+            </div>
           </div>
         </motion.div>
 
+        {/* Stats Row */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="grid grid-cols-2 gap-3 sm:gap-4 mb-12 lg:mb-16"
+        >
+          <StatCard value={`${totalSkills}+`} label="Technologies" icon={Zap} />
+          <StatCard value={String(skillCategories.length)} label="Domains" icon={CheckCircle} />
+        </motion.div>
+
         {/* Skills Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
           {skillCategories.map((category, index) => {
             const CategoryIcon = category.icon;
-            
+
             return (
-              <motion.div
+              <motion.article
                 key={category.title}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-50px' }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
-                className="group h-full"
+                viewport={{ once: true, margin: '-10%' }}
+                transition={{ duration: 0.5, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ y: -3 }}
+                className="group relative rounded-3xl bg-white border border-[#EFE3D0] shadow-[0_4px_20px_-10px_rgba(70,45,25,0.10)] hover:shadow-[0_18px_40px_-18px_rgba(70,45,25,0.22)] hover:border-[#E0CFB5] transition-all duration-400 overflow-hidden flex flex-col"
               >
-                <div className="relative bg-[#162127] backdrop-blur-md rounded-3xl p-8 border border-[#3A3534] hover:border-[#CF9D7B]/50 hover:bg-[#162127]/80 transition-all duration-300 h-full flex flex-col shadow-xl">
-                  
+                {/* Top hairline accent */}
+                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#C77F45] via-[#E8B97E] to-transparent opacity-70" />
+
+                <div className="p-6 lg:p-7 flex flex-col h-full">
+
                   {/* Category Header */}
-                  <div className="flex items-start justify-between mb-8">
-                     <div className="p-3 rounded-xl bg-gradient-to-br from-[#724B39] to-[#5C3A2A] text-[#E0E0E0] shadow-lg shadow-[#724B39]/20 group-hover:scale-110 transition-transform duration-300">
-                        <CategoryIcon size={24} />
-                     </div>
-                     <div className="text-right">
-                        <h3 className="text-lg font-bold text-[#E0E0E0] leading-tight mb-1">{category.title}</h3>
-                        <span className="text-xs font-medium text-[#CF9D7B]/60 uppercase tracking-wider">Module {index + 1}</span>
-                     </div>
+                  <div className="flex items-start justify-between mb-6">
+                    <div className="w-11 h-11 rounded-xl bg-[#F5EFE6] flex items-center justify-center text-[#7A5A3F] group-hover:bg-[#1A1614] group-hover:text-[#E8B97E] transition-colors duration-300">
+                      <CategoryIcon size={20} strokeWidth={1.8} />
+                    </div>
+                    <div className="text-right">
+                      <span className="block text-[10px] font-semibold tracking-[0.18em] uppercase text-[#A39A8E] mb-1 font-sora">
+                        Module {String(index + 1).padStart(2, '0')}
+                      </span>
+                      <h3 className="font-sora text-[17px] lg:text-[18px] font-semibold tracking-tight text-[#1A1614] leading-tight">
+                        {category.title}
+                      </h3>
+                    </div>
                   </div>
 
-                  {/* Primary Skills (Core) */}
-                  <div className="mb-8">
-                    <h4 className="flex items-center gap-2 text-xs font-bold text-[#CF9D7B] uppercase tracking-wider mb-4 opacity-80">
-                       <span className="w-1.5 h-1.5 rounded-full bg-[#CF9D7B]" /> Core Stack
-                    </h4>
-                    <div className="grid grid-cols-1 gap-3">
+                  {/* Core Stack */}
+                  <div className="mb-6">
+                    <div className="flex items-center gap-2 mb-3.5">
+                      <span className="h-[2px] w-3.5 rounded-full bg-[#C77F45]" />
+                      <h4 className="text-[10.5px] font-semibold tracking-[0.18em] uppercase text-[#7A5A3F] font-sora">
+                        Core Stack
+                      </h4>
+                    </div>
+
+                    <div className="flex flex-col gap-2">
                       {category.primarySkills.map((skill) => {
                         const IconComponent = skill.icon;
                         return (
                           <div
                             key={skill.name}
-                            className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[#0C1519]/60 border border-[#3A3534] group-hover:border-[#CF9D7B]/40 transition-colors"
+                            className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-[#FAF6EF] border border-[#EFE3D0] group-hover:border-[#E0CFB5] transition-colors"
                           >
-                            <IconComponent 
-                              className="w-5 h-5 flex-shrink-0" 
-                              style={{ color: skill.color === '#ffffff' ? '#CF9D7B' : skill.color }}
+                            <IconComponent
+                              className="w-[18px] h-[18px] flex-shrink-0"
+                              style={{ color: resolveIconColor(skill.color) }}
                             />
-                            <span className="text-base font-bold text-[#E0E0E0]">
+                            <span className="text-[14px] font-semibold text-[#1A1614]">
                               {skill.name}
                             </span>
                           </div>
@@ -231,24 +257,24 @@ export default function SkillsSection() {
                     </div>
                   </div>
 
-                  {/* Secondary Skills (Toolkit) */}
-                  <div className="mt-auto">
-                    <h4 className="text-xs font-bold text-[#A0A0A0] uppercase tracking-wider mb-3 pl-1">
-                       Additional Toolkit
+                  {/* Additional Toolkit */}
+                  <div className="mt-auto pt-1">
+                    <h4 className="text-[10.5px] font-semibold tracking-[0.18em] uppercase text-[#8B8680] mb-3 font-sora">
+                      Additional Toolkit
                     </h4>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-1.5">
                       {category.secondarySkills.map((skill) => {
                         const IconComponent = skill.icon;
                         return (
                           <div
                             key={skill.name}
-                            className="flex items-center gap-1.5 px-3 py-1.5 bg-[#0C1519]/40 rounded-lg border border-[#3A3534] hover:bg-[#0C1519] hover:border-[#CF9D7B]/30 transition-colors cursor-default"
+                            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white border border-[#E8E2D9] hover:bg-[#FAF6EF] hover:border-[#D9CFBE] transition-colors duration-200"
                           >
-                            <IconComponent 
-                              className="w-3.5 h-3.5 opacity-70" 
-                              style={{ color: skill.color === '#ffffff' ? '#A0A0A0' : skill.color }}
+                            <IconComponent
+                              className="w-3 h-3 flex-shrink-0 opacity-90"
+                              style={{ color: resolveIconColor(skill.color) }}
                             />
-                            <span className="text-xs font-medium text-[#A0A0A0]">
+                            <span className="text-[11.5px] font-medium text-[#5A5550]">
                               {skill.name}
                             </span>
                           </div>
@@ -256,13 +282,38 @@ export default function SkillsSection() {
                       })}
                     </div>
                   </div>
-
                 </div>
-              </motion.div>
+              </motion.article>
             );
           })}
         </div>
       </div>
     </section>
+  );
+}
+
+function StatCard({
+  value,
+  label,
+  icon: Icon,
+}: {
+  value: string;
+  label: string;
+  icon: LucideIcon;
+}) {
+  return (
+    <div className="group relative flex items-center gap-3 sm:gap-4 p-4 sm:p-5 rounded-2xl bg-white border border-[#EFE3D0] shadow-[0_2px_10px_-4px_rgba(70,45,25,0.06)] hover:shadow-[0_12px_28px_-14px_rgba(70,45,25,0.2)] hover:border-[#E0CFB5] transition-all duration-300">
+      <div className="w-10 h-10 sm:w-11 sm:h-11 shrink-0 rounded-xl bg-[#F5EFE6] flex items-center justify-center text-[#7A5A3F] group-hover:bg-[#1A1614] group-hover:text-[#E8B97E] transition-colors duration-300">
+        <Icon size={18} strokeWidth={1.8} />
+      </div>
+      <div className="min-w-0">
+        <div className="font-sora text-[1.5rem] sm:text-[1.75rem] font-semibold tracking-tight text-[#1A1614] leading-none mb-1">
+          {value}
+        </div>
+        <div className="text-[10.5px] sm:text-[11px] font-semibold tracking-[0.14em] uppercase text-[#8B8680]">
+          {label}
+        </div>
+      </div>
+    </div>
   );
 }
