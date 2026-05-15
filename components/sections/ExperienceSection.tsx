@@ -63,21 +63,8 @@ export default function ExperienceSection() {
   return (
     <section
       id="experience"
-      className="relative py-20 lg:py-28 bg-[#FAF8F5] text-[#1A1614] overflow-hidden"
+      className="surface-warm relative py-20 lg:py-28 text-[#1A1614] overflow-hidden"
     >
-      {/* Soft warm ambient background */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-[5%] left-[-10%] w-[560px] h-[560px] rounded-full bg-[#F2E5D2] blur-[150px] opacity-55" />
-        <div className="absolute bottom-[10%] right-[-10%] w-[560px] h-[560px] rounded-full bg-[#EFE4D4] blur-[150px] opacity-50" />
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage:
-              'radial-gradient(circle at 1px 1px, #1A1614 1px, transparent 0)',
-            backgroundSize: '28px 28px',
-          }}
-        />
-      </div>
 
       <div className="container mx-auto px-6 lg:px-10 relative z-10">
 
@@ -111,7 +98,7 @@ export default function ExperienceSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="grid grid-cols-3 gap-3 sm:gap-4 mb-16 lg:mb-20"
+          className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-16 lg:mb-20"
         >
           {impactStats.map((stat, i) => {
             const Icon = stat.icon;
@@ -157,23 +144,21 @@ function TimelineItem({ data, index }: { data: Experience; index: number }) {
       transition={{ duration: 0.6, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
       className="relative group/card"
     >
-      {/* Ambient warm bloom behind the card */}
+      {/* Ambient warm bloom behind the card — desktop only (filters are expensive on mobile) */}
       <div
         aria-hidden="true"
-        className="absolute -inset-6 lg:-inset-8 -z-10 opacity-0 group-hover/card:opacity-100 transition-opacity duration-700"
+        className="hidden lg:block absolute -inset-8 -z-10 opacity-0 group-hover/card:opacity-100 transition-opacity duration-700"
         style={{
           background:
             'radial-gradient(60% 60% at 20% 25%, rgba(232,185,126,0.18), transparent 70%), radial-gradient(50% 60% at 85% 75%, rgba(199,127,69,0.10), transparent 70%)',
-          filter: 'blur(20px)',
         }}
       />
       <div
         aria-hidden="true"
-        className="absolute -inset-4 lg:-inset-6 -z-10"
+        className="hidden lg:block absolute -inset-6 -z-10"
         style={{
           background:
             'radial-gradient(45% 60% at 18% 20%, rgba(242,229,210,0.55), transparent 70%)',
-          filter: 'blur(28px)',
         }}
       />
 

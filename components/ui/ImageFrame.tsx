@@ -15,9 +15,8 @@ type ImageFrameProps = Omit<ImageProps, 'onLoad' | 'onError'> & {
  * Image with a premium shimmer skeleton while loading and an
  * elegant fallback state if the source fails.
  *
- * Behavior:
- * - Shimmer overlay is visible until the image's onLoadingComplete fires.
- * - If the image fails to load, an editorial fallback card is rendered instead.
+ * Once the image loads, the shimmer is removed from the DOM entirely
+ * so its keyframe animation can stop (avoids unnecessary repaint work).
  */
 export function ImageFrame({
   imageClassName,
@@ -43,18 +42,15 @@ export function ImageFrame({
 
   return (
     <>
-      {/* Shimmer skeleton — covers frame until load completes */}
-      <div
-        className={`skeleton-shimmer absolute inset-0 transition-opacity duration-500 ${
-          isLoaded ? 'opacity-0 pointer-events-none' : 'opacity-100'
-        }`}
-        aria-hidden="true"
-      />
+      {/* Shimmer skeleton — removed from DOM once loaded so the keyframe stops */}
+      {!isLoaded && (
+        <div className="skeleton-shimmer absolute inset-0" aria-hidden="true" />
+      )}
       <Image
         {...imageProps}
         alt={alt}
-        className={`${imageClassName ?? ''} transition-opacity duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-        onLoadingComplete={() => setIsLoaded(true)}
+        className={`${imageClassName ?? ''} transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+        onLoad={() => setIsLoaded(true)}
         onError={() => setHasError(true)}
       />
     </>

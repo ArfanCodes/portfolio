@@ -64,21 +64,8 @@ export default function ProjectsSection() {
   return (
     <section
       id="projects"
-      className="relative py-20 lg:py-28 bg-[#FAF8F5] text-[#1A1614] overflow-hidden"
+      className="surface-warm relative py-20 lg:py-28 text-[#1A1614] overflow-hidden"
     >
-      {/* Soft warm ambient background */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-[10%] right-[-10%] w-[620px] h-[620px] rounded-full bg-[#F2E5D2] blur-[140px] opacity-60" />
-        <div className="absolute bottom-[5%] left-[-15%] w-[620px] h-[620px] rounded-full bg-[#EFE4D4] blur-[160px] opacity-50" />
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage:
-              'radial-gradient(circle at 1px 1px, #1A1614 1px, transparent 0)',
-            backgroundSize: '28px 28px',
-          }}
-        />
-      </div>
 
       <div className="container mx-auto px-6 lg:px-10 relative z-10">
 

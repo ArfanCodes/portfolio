@@ -46,21 +46,8 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="relative pt-20 lg:pt-28 pb-4 bg-[#FAF8F5] text-[#1A1614] overflow-hidden"
+      className="surface-warm relative pt-20 lg:pt-28 pb-4 text-[#1A1614] overflow-hidden"
     >
-      {/* Soft warm ambient background */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-[5%] right-[-15%] w-[620px] h-[620px] rounded-full bg-[#F2E5D2] blur-[150px] opacity-60" />
-        <div className="absolute bottom-[5%] left-[-15%] w-[620px] h-[620px] rounded-full bg-[#EFE4D4] blur-[150px] opacity-50" />
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage:
-              'radial-gradient(circle at 1px 1px, #1A1614 1px, transparent 0)',
-            backgroundSize: '28px 28px',
-          }}
-        />
-      </div>
 
       <div className="container mx-auto px-6 lg:px-10 relative z-10 max-w-6xl">
 

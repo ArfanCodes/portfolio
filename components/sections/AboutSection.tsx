@@ -60,24 +60,8 @@ export default function AboutSection() {
     <section
       ref={sectionRef}
       id="about"
-      className="relative min-h-screen flex items-center py-28 lg:py-36 overflow-hidden bg-[#FAF8F5] text-[#1A1614]"
+      className="surface-warm relative min-h-screen flex items-center py-28 lg:py-36 overflow-hidden text-[#1A1614]"
     >
-      {/* Soft warm ambient background */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-[-15%] right-[-10%] w-[640px] h-[640px] rounded-full bg-[#F2E5D2] blur-[140px] opacity-70" />
-        <div className="absolute bottom-[-20%] left-[-15%] w-[640px] h-[640px] rounded-full bg-[#EFE4D4] blur-[160px] opacity-60" />
-        <div className="absolute top-1/3 left-1/2 w-[420px] h-[420px] rounded-full bg-[#F8EFE2] blur-[120px] opacity-40 -translate-x-1/2" />
-
-        {/* Subtle grain via fine dot pattern */}
-        <div
-          className="absolute inset-0 opacity-[0.035]"
-          style={{
-            backgroundImage:
-              'radial-gradient(circle at 1px 1px, #1A1614 1px, transparent 0)',
-            backgroundSize: '28px 28px',
-          }}
-        />
-      </div>
 
       <div className="container mx-auto px-6 lg:px-10 relative z-10">
 

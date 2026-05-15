@@ -186,6 +186,21 @@
   animation: gradient 3s ease infinite;
 }
 
+/*
+ * Warm ambient surface — applied to every section to give a soft peach wash
+ * with a fine dot grain. Uses CSS radial-gradients instead of blurred blobs
+ * so mobile compositor does one cheap paint instead of stacked blur layers.
+ */
+.surface-warm {
+  background-color: #FAF8F5;
+  background-image:
+    radial-gradient(60% 60% at 100% 0%, rgba(242, 229, 210, 0.55), transparent 65%),
+    radial-gradient(60% 60% at 0% 100%, rgba(239, 228, 212, 0.5), transparent 65%),
+    radial-gradient(circle at 1px 1px, rgba(26, 22, 20, 0.04) 1px, transparent 0);
+  background-size: auto, auto, 28px 28px;
+  background-repeat: no-repeat, no-repeat, repeat;
+}
+
 /* Premium shimmer for skeletons */
 @keyframes shimmer {
   0% { transform: translateX(-100%); }

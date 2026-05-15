@@ -48,21 +48,8 @@ export default function AchievementsSection() {
   return (
     <section
       id="achievements"
-      className="relative py-20 lg:py-28 bg-[#FAF8F5] text-[#1A1614] overflow-hidden"
+      className="surface-warm relative py-20 lg:py-28 text-[#1A1614] overflow-hidden"
     >
-      {/* Soft warm ambient background */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-[8%] right-[-10%] w-[560px] h-[560px] rounded-full bg-[#F2E5D2] blur-[150px] opacity-55" />
-        <div className="absolute bottom-[8%] left-[-10%] w-[560px] h-[560px] rounded-full bg-[#EFE4D4] blur-[150px] opacity-50" />
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage:
-              'radial-gradient(circle at 1px 1px, #1A1614 1px, transparent 0)',
-            backgroundSize: '28px 28px',
-          }}
-        />
-      </div>
 
       <div className="container mx-auto px-6 lg:px-10 relative z-10">
 
@@ -112,7 +99,7 @@ export default function AchievementsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="grid grid-cols-3 gap-3 sm:gap-4"
+          className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4"
         >
           <StatCard value="2" label="Total Awards" icon={Trophy} />
           <StatCard value="2nd" label="Place Rankings" icon={Medal} />
